@@ -1,6 +1,6 @@
 <?php defined('_JEXEC') or die('Restricted access'); ?>
 <div id="ja-content">
-<div class="componentheading">Current Ledger</div>
+<div class="componentheading">MUUSA Current Year Ledger</div>
 <table class="blog" cellpadding="0" cellspacing="0">
 <?php
 $reg = $this->registration;
@@ -11,7 +11,7 @@ echo "            <div class='article-content'>\n";
 echo "               <table cellpadding='5' cellspacing ='5' align='center' width='100%'>\n";
 echo "                  <tr>\n";
 echo "                     <td colspan='3' align='right'>\n";
-echo "                        <a href='http://www.muusa.org/index.php?option=com_docman&task=doc_download&gid=36'>Ledger Archive</a>\n";
+echo "                        <a href='index.php/index.php/component/docman/doc_download/25'>Ledger Archive</a>\n";
 echo "                     </td>\n";
 echo "                  </tr>\n";
 echo "                  <tr>\n";

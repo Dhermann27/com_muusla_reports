@@ -11,49 +11,32 @@ echo "               <table cellpadding='5' cellspacing ='5'>\n";
 echo "                  <tr>\n";
 echo "                     <td>Last Name</td>\n";
 echo "                     <td>First Name</td>\n";
-echo "                     <td>Location</td>\n";
 echo "                     <td>Program</td>\n";
 echo "                     <td>Birthdate</td>\n";
 echo "                     <td>Room Number</td>\n";
-echo "                     <td>&nbsp;</td>\n";
-echo "                     <td>&nbsp;</td>\n";
 echo "                  </tr>\n";
 $count = 0;
-foreach ($this->campers as $camperid => $camper) {
-	$count++;
+foreach ($this->campers as $familyid => $camper) {
 	echo "                  <tr>\n";
-	echo "                     <td>" . $camper["lastname"] . "</td>\n";
-	echo "                     <td>" . $camper['firstname'] . "</td>\n";
-	echo "                     <td>" . $camper['city'] . ", " . $camper['statecd'] . "</td>\n";
-	echo "                     <td>" . $camper['programname'] . "</td>\n";
-	echo "                     <td>" . $camper['birthdate'] . "</td>\n";
-	echo "                     <td>" . $camper['roomnbr'] . "</td>\n";
-	echo "                     <td><a href='index.php?option=com_muusla_database&task=editcamper&view=campers&Itemid=70&editcamper=" . $camper['camperid'] . "'>Camper</a></td>\n";
-	echo "                     <td><a href='index.php?option=com_muusla_database&task=save&view=camperdetails&Itemid=71&editcamper=" . $camper['camperid'] . "'>Details</a></td>\n";
+	echo "                     <td colspan='2'><h4>" . $camper["familyname"] . "</h4></td>\n";
+	echo "                     <td colspan='2'>" . $camper['city'] . ", " . $camper['statecd'] . "</td>\n";
+	echo "                     <td align='right'><a href='index.php?option=com_muusla_database&task=save&view=camperdetails&Itemid=71&editcamper=" . $camper['familyid'] . "'>Application</a></td>\n";
 	echo "                  </tr>\n";
 	if($camper['children']) {
 		foreach($camper['children'] as $child) {
 			$count++;
-			echo "                  <tr style='font-size:.9em;font-style:italic'>\n";
+			echo "                  <tr style='font-size:.9em'>\n";
 			echo "                     <td>$child->lastname</i></td>\n";
 			echo "                     <td>$child->firstname</i></td>\n";
-			echo "                     <td>&nbsp;</td>\n";
 			echo "                     <td>$child->programname</i></td>\n";
 			echo "                     <td>$child->birthdate</i></td>\n";
-			echo "                     <td>$child->roomnbr</i></td>\n";
-			echo "                     <td><a href='index.php?option=com_muusla_database&task=editcamper&view=campers&Itemid=70&editcamper=$child->camperid'>Camper</a></td>\n";
-			echo "                     <td><a href='index.php?option=com_muusla_database&task=save&view=camperdetails&Itemid=71&editcamper=$child->camperid'>Details</a></td>\n";
+			echo "                     <td align='right'>$child->roomnbr</i></td>\n";
 			echo "                  </tr>\n";
 		}
 	}
 }
 echo "                  <tr>\n";
-echo "                     <td>&nbsp;</td>\n";
-echo "                     <td>&nbsp;</td>\n";
-echo "                     <td colspan='2' align='2'>Total Campers: $count</td>\n";
-echo "                     <td>&nbsp;</td>\n";
-echo "                     <td>&nbsp;</td>\n";
-echo "                     <td>&nbsp;</td>\n";
+echo "                     <td colspan='5' align='right'><b>Total Campers: $count</b></td>\n";
 echo "                  </tr>\n";
 echo "               </table>\n";
 echo "            </div>\n";

@@ -21,19 +21,19 @@ class muusla_reportsViewallledger extends JView
  		$this->assignRef('registration', $model->getRegistration());
  		$this->assignRef('regbd', $model->getRegistrationBreakdown());
  		$this->assignRef('pollyReg', $model->getPollyRegistration());
-// 		$this->assignRef('housingFees', $model->getHousingFees());
-// 		$this->assignRef('payments', $model->getAllPayments());
-// 		$this->assignRef('depositspp', $model->getAllDeposits("1005"));
-// 		$this->assignRef('depositschk', $model->getAllDeposits("1001,1006"));
-// 		$this->assignRef('depositscc', $model->getAllDeposits("1007,1016"));
-// 		$this->assignRef('depositscash', $model->getAllDeposits("1017"));
-// 		$this->assignRef('housebd', $model->getHousingBreakdown());
-// 		$this->assignRef('pollyHouse', $model->getPollyHousing());
-// 		$this->assignRef('latefees', $model->getLatefees());
-// 		$this->assignRef('donations', $model->getDonations());
-// 		$this->assignRef('scholarships', $model->getScholarships());
-// 		$this->assignRef('yscholarships', $model->getYScholarships());
-// 		$this->assignRef('campers', $model->getCampers());
+ 		$this->assignRef('housingFees', $model->getHousingFees());
+ 		$this->assignRef('payments', $model->getAllPayments());
+ 		$this->assignRef('depositspp', $model->getAllDeposits("1005"));
+ 		$this->assignRef('depositschk', $model->getAllDeposits("1001,1006"));
+ 		$this->assignRef('depositscc', $model->getAllDeposits("1007,1016"));
+ 		$this->assignRef('depositscash', $model->getAllDeposits("1017"));
+ 		$this->assignRef('housebd', $model->getHousingBreakdown());
+ 		$this->assignRef('pollyHouse', $model->getPollyHousing());
+ 		$this->assignRef('latefees', $model->getLatefees());
+ 		$this->assignRef('donations', $model->getDonations());
+ 		$this->assignRef('scholarships', $model->getScholarships());
+ 		$this->assignRef('yscholarships', $model->getYScholarships());
+ 		$this->assignRef('campers', $model->getCampers());
 		parent::display($tpl);
 	}
 

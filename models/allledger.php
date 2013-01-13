@@ -84,7 +84,7 @@ class muusla_reportsModelallledger extends JModel
 
 	function getHousingBreakdown() {
 		$db =& JFactory::getDBO();
-		$query = "SELECT mp.housing_amount amount, mg.programid programid, mg.name programname, CONCAT(mp.firstname, ' ', mp.lastname) fullname, mp.name positionname FROM muusa_credits_v mp, muusa_programs mg WHERE mp.programid=mg.programid AND mp.housing_amount>0 AND mp.name NOT LIKE 'Polly%' ORDER BY mg.name, mp.lastname, mp.firstname";
+		$query = "SELECT mp.housing_amount amount, mg.programid programid, mg.name programname, CONCAT(mp.firstname, ' ', mp.lastname) fullname, mp.positionname positionname FROM muusa_credits_v mp, muusa_programs mg WHERE mp.programid=mg.programid AND mp.housing_amount>0 AND mp.positionname NOT LIKE 'Polly%' ORDER BY mg.name, mp.lastname, mp.firstname";
 		$db->setQuery($query);
 		return $db->loadObjectList();
 	}

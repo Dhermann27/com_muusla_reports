@@ -17,10 +17,10 @@ class muusla_reportsViewallcampers extends JView
       $model =& $this->getModel();
       $campers = $model->getCampers();
       foreach($model->getChildren() as $child) {
-         if($campers[$child->hohid]["children"] == null) {
-            $campers[$child->hohid]["children"] = array($child);
+         if($campers[$child->familyid]["children"] == null) {
+            $campers[$child->familyid]["children"] = array($child);
          } else {
-            array_push($campers[$child->hohid]["children"], $child);
+            array_push($campers[$child->familyid]["children"], $child);
          }
       }
       $this->assignRef('campers', $campers);
