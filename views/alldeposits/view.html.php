@@ -15,17 +15,20 @@ class muusla_reportsViewalldeposits extends JView
 {
 	function display($tpl = null) {
 		$model =& $this->getModel();
-		if(JRequest::getSafe("paypals") == "1") {
-			$model->setCharges("1005");
-		}
-		if(JRequest::getSafe("checks") == "1") {
-			$model->setCharges("1001,1006");
-		}
-		if(JRequest::getSafe("creditcards") == "1") {
-			$model->setCharges("1007,1016");
-		}
-		if(JRequest::getSafe("cash") == "1") {
-			$model->setCharges("1017");
+		$user = JFactory::getUser();
+		if(in_array("8", $user->groups) || in_array("10", $user->groups)) {
+			if(JRequest::getSafe("paypals") == "1") {
+				$model->setCharges("1005");
+			}
+			if(JRequest::getSafe("checks") == "1") {
+				$model->setCharges("1001,1006");
+			}
+			if(JRequest::getSafe("creditcards") == "1") {
+				$model->setCharges("1007,1016");
+			}
+			if(JRequest::getSafe("cash") == "1") {
+				$model->setCharges("1017");
+			}
 		}
 		$this->assignRef('paypals', $model->getCharges("1005"));
 		$this->assignRef('checks', $model->getCharges("1001,1006"));
