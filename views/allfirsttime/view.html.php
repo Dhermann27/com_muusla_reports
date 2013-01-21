@@ -15,30 +15,30 @@ class muusla_reportsViewallfirsttime extends JView
 {
 	function display($tpl = null) {
 		$model =& $this->getModel();
-		$campers = $model->getCampers(999);
-		$children = $model->getChildren(999);
+		$campers = $model->getCampers();
+		$children = $model->getChildren(999, "0");
+		$camperids = array();
 		if(count($children) > 0) {
 			foreach($children as $child) {
-				if($campers[$child->hohid]["children"] == null) {
-					$campers[$child->hohid]["children"] = array($child);
+				array_push($camperids, $child->camperid);
+				if($campers[$child->familyid]["children"] == null) {
+					$campers[$child->familyid]["children"] = array($child);
 				} else {
-					array_push($campers[$child->hohid]["children"], $child);
+					array_push($campers[$child->familyid]["children"], $child);
+				}
+			}
+		}
+		$tchildren = $model->getChildren(3, implode(",", $camperids));
+		if(count($tchildren) > 0) {
+			foreach($tchildren as $child) {
+				if($campers[$child->familyid]["tchildren"] == null) {
+					$campers[$child->familyid]["tchildren"] = array($child);
+				} else {
+					array_push($campers[$child->familyid]["tchildren"], $child);
 				}
 			}
 		}
 		$this->assignRef('campers', $campers);
-		$tcampers = $model->getCampers(3);
-		$tchildren = $model->getChildren(3);
-		if(count($tchildren) > 0) {
-			foreach($tchildren as $child) {
-				if($tcampers[$child->hohid]["children"] == null) {
-					$tcampers[$child->hohid]["children"] = array($child);
-				} else {
-					array_push($tcampers[$child->hohid]["children"], $child);
-				}
-			}
-		}
-		$this->assignRef('tcampers', $tcampers);
 
 		parent::display($tpl);
 	}

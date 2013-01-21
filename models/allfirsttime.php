@@ -19,16 +19,16 @@ jimport( 'joomla.application.component.model' );
  */
 class muusla_reportsModelallfirsttime extends JModel
 {
-   function getCampers($year) {
+   function getCampers() {
       $db =& JFactory::getDBO();
-      $query = "SELECT mc.camperid, mc.firstname, mc.lastname, mc.city, mc.statecd, mc.programname, mc.birthdate, mc.roomnbr, IF((SELECT COUNT(*) FROM muusa_attendees ma WHERE mc.camperid=ma.camperid)>0,1,0) workshops FROM muusa_campers_v mc WHERE mc.hohid=0 AND (SELECT COUNT(*) FROM muusa_fiscalyear mf, muusa_currentyear my WHERE mc.camperid=mf.camperid AND mf.fiscalyear>=(my.year-$year))=1 ORDER BY lastname, firstname, city, statecd";
+      $query = "SELECT mc.familyid, mc.familyname, mc.city, mc.statecd FROM muusa_family_v mc ORDER BY mc.familyname";
       $db->setQuery($query);
-      return $db->loadAssocList("camperid");
+      return $db->loadAssocList("familyid");
    }
     
-   function getChildren($year) {
+   function getChildren($year, $campers) {
       $db =& JFactory::getDBO();
-      $query = "SELECT mc.camperid, mc.hohid, mc.firstname, mc.lastname, mc.programname, mc.birthdate, mc.roomnbr, IF((SELECT COUNT(*) FROM muusa_attendees ma WHERE mc.camperid=ma.camperid)>0,1,0) workshops FROM muusa_campers_v mc WHERE mc.hohid!=0 AND (SELECT COUNT(*) FROM muusa_fiscalyear mf, muusa_currentyear my WHERE mc.camperid=mf.camperid AND mf.fiscalyear>=(my.year-$year))=1 AND (SELECT COUNT(*) FROM muusa_fiscalyear mf, muusa_currentyear my WHERE mc.hohid=mf.camperid AND mf.fiscalyear>=(my.year-$year))=1 ORDER BY lastname, firstname, city, statecd";
+      $query = "SELECT mc.camperid, mc.familyid, mc.firstname, mc.lastname, mc.programname, mc.birthdate, mc.roomnbr, IF((SELECT COUNT(*) FROM muusa_attendees ma WHERE mc.camperid=ma.camperid)>0,1,0) workshops FROM muusa_campers_v mc, muusa_fiscalyear mf, muusa_currentyear my WHERE mc.camperid=mf.camperid AND mf.fiscalyear>=(my.year-$year) AND mc.camperid NOT IN ($campers) GROUP BY mc.camperid HAVING COUNT(*)=1 ORDER BY STR_TO_DATE(birthdate, '%m/%d/%Y')";
       $db->setQuery($query);
       return $db->loadObjectList();
    }
