@@ -11,11 +11,12 @@ $position = "";
 $email = "";
 foreach ($this->campers as $camper) {
 	if($position != $camper->name) {
+		echo "               </p>\n";
 		if($email != "") {
 			echo "               <p>Emails: $email</p>\n";
 			$email = "";
 		}
-		echo "               <p><b>$camper->name</b><br />\n";
+		echo "               <p><b>$camper->name</b></p>\n<p>";
 	}
 	echo "                  <a href='index.php?option=com_muusla_database&task=save&view=camperdetails&Itemid=71&editcamper=$camper->camperid'>$camper->fullname</a><br />\n";
 	if($camper->email != "") {
