@@ -13,13 +13,13 @@ jimport( 'joomla.application.component.view');
  */
 class muusla_reportsViewallprograms extends JView
 {
-   function display($tpl = null) {
-      $model =& $this->getModel();
-      $this->assignRef('campers', $model->getCampers());
-      $this->assignRef('programs', $model->getPrograms());
+	function display($tpl = null) {
+		$model =& $this->getModel();
+		$this->assignRef('campers', $model->getCampers());
+		$this->assignRef('programs', $model->getPrograms());
 
-      parent::display($tpl);
-   }
+		parent::display($tpl);
+	}
 
 }
 ?>

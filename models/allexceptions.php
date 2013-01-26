@@ -35,14 +35,14 @@ class muusla_reportsModelallexceptions extends JModel
 
 	function getPrograms() {
 		$db =& JFactory::getDBO();
-		$query = "SELECT mc.camperid, CONCAT(mc.lastname, ', ', mc.firstname) fullname, (SELECT name FROM muusa_programs WHERE programid=muusa_programs_id_f(mv.birthdate, mv.gradeoffset)) expected, mv.programname actual FROM muusa_campers_v mv, muusa_campers mc WHERE mv.camperid=mc.camperid AND mc.programid!=muusa_programs_id_f(mv.birthdate, mv.gradeoffset) ORDER BY mc.lastname, mc.firstname";
+		$query = "SELECT mc.camperid, CONCAT(mc.lastname, ', ', mc.firstname) fullname, (SELECT name FROM muusa_programs WHERE programid=muusa_programs_id_f(STR_TO_DATE(mv.birthdate, '%m/%d/%Y'), mv.gradeoffset)) expected, mv.programname actual FROM muusa_campers_v mv, muusa_campers mc WHERE mv.camperid=mc.camperid AND mc.programid!=muusa_programs_id_f(mv.birthdate, mv.gradeoffset) ORDER BY mc.lastname, mc.firstname";
 		$db->setQuery($query);
 		return $db->loadObjectList();
 	}
 	
 	function getProgramFees() {
 		$db =& JFactory::getDBO();
-		$query = "SELECT mc.camperid, CONCAT(mc.lastname, ', ', mc.firstname) fullname, mv.amount actual, muusa_programs_fee_f(mc.birthdate, mc.gradeoffset) expected FROM muusa_campers_v mc, muusa_charges_v mv WHERE mc.camperid=mv.camperid AND mv.chargetypeid=1003 AND mv.amount!=muusa_programs_fee_f(mc.birthdate, mc.gradeoffset) ORDER BY mc.lastname, mc.firstname";
+		$query = "SELECT mc.camperid, CONCAT(mc.lastname, ', ', mc.firstname) fullname, mv.amount actual, muusa_programs_fee_f(STR_TO_DATE(mc.birthdate, '%m/%d/%Y'), mc.gradeoffset) expected FROM muusa_campers_v mc, muusa_charges_v mv WHERE mc.camperid=mv.camperid AND mv.chargetypeid=1003 AND mv.amount!=muusa_programs_fee_f(STR_TO_DATE(mc.birthdate, '%m/%d/%Y'), mc.gradeoffset) ORDER BY mc.lastname, mc.firstname";
 		$db->setQuery($query);
 		return $db->loadObjectList();
 	}

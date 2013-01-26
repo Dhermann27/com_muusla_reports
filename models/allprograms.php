@@ -21,7 +21,7 @@ class muusla_reportsModelallprograms extends JModel
 {
    function getCampers() {
       $db =& JFactory::getDBO();
-      $query = "SELECT mc.camperid camperid, mc.sexcd, CONCAT(mc.lastname, ', ', mc.firstname) fullname, mc.programid, muusa_age_f(DATE_FORMAT(mc.birthdate, '%m/%d/%Y')) age, mc.gradeoffset, CONCAT(mp.lastname, ', ', mp.firstname) parent, mc.sponsor sponsor, mc.email email FROM (muusa_campers mc, muusa_fiscalyear mf, muusa_currentyear my) LEFT JOIN (muusa_campers mp, muusa_fiscalyear mo) ON mp.camperid=mc.hohid AND mp.camperid=mo.camperid AND mo.fiscalyear=my.year WHERE mc.camperid=mf.camperid AND mf.fiscalyear=my.year AND mc.programid!=1000 ORDER BY mc.lastname, mc.firstname";
+      $query = "SELECT mc.camperid, mc.sexcd, mc.firstname, mc.lastname, mc.programid, mc.age, mc.grade, mf.familyname, mc.sponsor sponsor, mc.email email FROM muusa_campers_v mc, muusa_family_v mf WHERE mc.familyid=mf.familyid AND mc.programid!=1000 ORDER BY mc.lastname, mc.firstname";
       $db->setQuery($query);
       return $db->loadObjectList();
    }
