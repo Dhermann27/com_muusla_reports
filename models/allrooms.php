@@ -21,7 +21,7 @@ class muusla_reportsModelallrooms extends JModel
 {
    function getCampers() {
       $db =& JFactory::getDBO();
-      $query = "SELECT mc.camperid, mc.hohid, mb.buildingid, mb.name buildingname, mr.roomnbr, CONCAT(mc.lastname, ', ', mc.firstname) fullname, DATE_FORMAT(mc.birthdate, '%m/%d/%Y') birthdate, mc.programname FROM (muusa_rooms mr, muusa_buildings mb) LEFT JOIN muusa_campers_v mc ON mr.roomid=mc.roomid WHERE mr.buildingid=mb.buildingid AND mr.is_workshop=0 ORDER BY mr.buildingid, mr.roomnbr, mc.hohid, mc.birthdate";
+      $query = "SELECT mc.camperid, mb.buildingid, mb.name buildingname, mr.roomnbr, mc.firstname, mc.lastname, mc.birthdate, mc.programname FROM (muusa_rooms mr, muusa_buildings mb) LEFT JOIN muusa_campers_v mc ON mr.roomid=mc.roomid WHERE mr.buildingid=mb.buildingid AND mr.is_workshop=0 ORDER BY mr.buildingid, mr.roomnbr, mc.familyid, STR_TO_DATE(birthdate, '%m/%d/%Y')";
       $db->setQuery($query);
       return $db->loadObjectList();
    }

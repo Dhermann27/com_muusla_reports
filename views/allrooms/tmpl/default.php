@@ -10,7 +10,8 @@ echo "            <div class='article-content'>\n";
 echo "               <table cellpadding='5' cellspacing ='5'>\n";
 echo "                  <tr>\n";
 echo "                     <td>Room Number</td>\n";
-echo "                     <td>Name</td>\n";
+echo "                     <td>First Name</td>\n";
+echo "                     <td>Last Name</td>\n";
 echo "                     <td>Program</td>\n";
 echo "                     <td>Birthdate</td>\n";
 echo "                     <td>&nbsp;</td>\n";
@@ -22,7 +23,7 @@ foreach ($this->campers as $camper) {
 	if($building == -1 || $camper->buildingid != $building) {
 		$building = $camper->buildingid;
 		echo "                  <tr>\n";
-		echo "                     <td colspan='6'><h3>$camper->buildingname</h3></td>\n";
+		echo "                     <td colspan='7'><h3>$camper->buildingname</h3></td>\n";
 		echo "                  </tr>\n";
 	}
 	if($camper->hohid == $prevhoh) {
@@ -36,7 +37,8 @@ foreach ($this->campers as $camper) {
 	} else {
 		echo "                     <td>&nbsp;</td>\n";
 	}
-	echo "                     <td>$camper->fullname</td>\n";
+	echo "                     <td>$camper->firstname</td>\n";
+	echo "                     <td>$camper->lastname</td>\n";
 	echo "                     <td>$camper->programname</td>\n";
 	echo "                     <td>$camper->birthdate</td>\n";
 	if($camper->camperid) {

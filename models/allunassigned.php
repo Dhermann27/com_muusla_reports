@@ -21,7 +21,7 @@ class muusla_reportsModelallunassigned extends JModel
 {   
    function getCampers() {
       $db =& JFactory::getDBO();
-      $query = "SELECT CONCAT(mc.lastname, ', ', mc.firstname) fullname, mp.name programname, mf.postmark postmark, mc.camperid camperid FROM muusa_campers mc, muusa_programs mp, muusa_fiscalyear mf WHERE mc.camperid=mf.camperid AND mc.programid=mp.programid AND mf.fiscalyear=2009 AND mf.roomid=0 ORDER BY mc.lastname, mc.firstname";
+      $query = "SELECT mc.firstname, mc.lastname, mc.programname, mc.familyid FROM muusa_campers_v mc WHERE mc.roomid=0";
       $db->setQuery($query);
       return $db->loadObjectList();
    }
