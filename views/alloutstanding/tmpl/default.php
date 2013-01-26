@@ -22,7 +22,7 @@ foreach ($this->charges as $camperid => $camper) {
       $fullcount += $camper["totallater"];
       $nowcount += max($camper["totalnow"],0);
       echo "                  <tr>\n";
-      echo "                     <td>" . $camper["fullname"] . "</td>\n";
+      echo "                     <td>" . $camper["familyname"] . "</td>\n";
       echo "                     <td>$" . number_format($camper["totallater"], 2) . "</td>\n";
       echo "                     <td>$" . number_format(max($camper["totalnow"],0), 2) . "</td>\n";
       echo "                     <td><a href='index.php?option=com_muusla_database&task=save&view=camperdetails&Itemid=71&editcamper=" . $camper["camperid"] . "'>Details</a></td>\n";

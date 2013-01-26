@@ -21,7 +21,7 @@ class muusla_reportsModelalloutstanding extends JModel
 {
 	function getCampers() {
 		$db =& JFactory::getDBO();
-		$query = "SELECT camperid camperid, CONCAT(lastname,', ', firstname) fullname, 0 totallater, 0 totalnow FROM muusa_campers_v WHERE hohid=0 ORDER BY lastname, firstname, statecd, city";
+		$query = "SELECT familyid, familyname, 0 totallater, 0 totalnow FROM muusa_family";
 		$db->setQuery($query);
 		return $db->loadAssocList("camperid");
 	}
@@ -35,7 +35,7 @@ class muusla_reportsModelalloutstanding extends JModel
 
 	function getCredits() {
 		$db =& JFactory::getDBO();
-		$query = "SELECT camperid, hohid, registration_amount, housing_amount FROM muusa_credits_v";
+		$query = "SELECT familyid, camperid, registration_amount, housing_amount FROM muusa_credits_v";
 		$db->setQuery($query);
 		return $db->loadObjectList();
 	}

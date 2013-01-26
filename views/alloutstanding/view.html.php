@@ -23,12 +23,8 @@ class muusla_reportsViewalloutstanding extends JView
 			}
 		}
 		foreach($model->getCredits() as $credit) {
-			$chargeid = $credit->camperid;
-			if($credit->hohid != 0) {
-				$chargeid = $credit->hohid;
-			}
-			$campers[$chargeid]["totalnow"] -= (float)preg_replace("/,/", "",  $credit->registration_amount+$credit->housing_amount);
-			$campers[$chargeid]["totallater"] -= (float)preg_replace("/,/", "",  $credit->registration_amount+$credit->housing_amount);
+			$campers[$credit->familyid]["totalnow"] -= (float)preg_replace("/,/", "",  $credit->registration_amount+$credit->housing_amount);
+			$campers[$credit->familyid]["totallater"] -= (float)preg_replace("/,/", "",  $credit->registration_amount+$credit->housing_amount);
 		}
 		$this->assignRef('charges', $campers);
 
