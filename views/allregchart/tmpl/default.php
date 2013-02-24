@@ -1,17 +1,14 @@
 <?php defined('_JEXEC') or die('Restricted access'); ?>
 <script
-	type='text/javascript'
-	src='components/com_muusla_reports/js/raphael-min.js'></script>
+   src="<?php echo JURI::root(true);?>/components/com_muusla_reports/js/raphael-min.js"></script>
 <script
-	type='text/javascript'
-	src='components/com_muusla_reports/js/g.raphael-min.js'></script>
+   src="<?php echo JURI::root(true);?>/components/com_muusla_reports/js/g.raphael-min.js"></script>
 <script
-	type='text/javascript'
-	src='components/com_muusla_reports/js/g.line-min.js'></script>
+   src="<?php echo JURI::root(true);?>/components/com_muusla_reports/js/g.line-min.js"></script>
 <div id="ja-content">
-	<div class="componentheading">Registration Chart</div>
-	<div id="holder"></div>
-	<script>
+   <div class="componentheading">Registration Chart</div>
+   <div id="holder"></div>
+   <script>
     	var r = Raphael("holder");
     	var dates = [];
     	var years = [];
@@ -41,29 +38,29 @@
 			}
 		};
         </script>
-	<table width="80%" align="center">
-		<tr>
-			<th>Year</th>
-			<th>New Campers</th>
-			<th>Old Campers<br />1-3 Years Missing
-			</th>
-			<th>Very Old Campers<br />4+ Years Missing
-			</th>
-			<th>Campers Lost</th>
-			<th>Total</th>
-		</tr>
-		<?php
-		foreach ($this->table as $year) {
-			echo "       <tr align='center'>\n";
-			echo "          <td><b>$year->fiscalyear</b></td>\n";
-			echo "          <td><font color='green'>+$year->newcampers</font></td>\n";
-			echo "          <td><font color='green'>+$year->oldcampers</font></td>\n";
-			echo "          <td><font color='green'>+$year->voldcampers</font></td>\n";
-			echo "          <td><font color='red'>-$year->lostcampers</font></td>\n";;
-			echo "          <td>$year->total</td>\n";
-			echo "       </tr>\n";
-		}
-		?>
-	</table>
-	<span class='article_separator'>&nbsp;</span>
+   <table width="80%" align="center">
+      <tr>
+         <th>Year</th>
+         <th>New Campers</th>
+         <th>Old Campers<br />1-3 Years Missing
+         </th>
+         <th>Very Old Campers<br />4+ Years Missing
+         </th>
+         <th>Campers Lost</th>
+         <th>Total</th>
+      </tr>
+      <?php
+      foreach ($this->table as $year) {
+         echo "       <tr align='center'>\n";
+         echo "          <td><b>$year->fiscalyear</b></td>\n";
+         echo "          <td><font color='green'>+$year->newcampers</font></td>\n";
+         echo "          <td><font color='green'>+$year->oldcampers</font></td>\n";
+         echo "          <td><font color='green'>+$year->voldcampers</font></td>\n";
+         echo "          <td><font color='red'>-$year->lostcampers</font></td>\n";;
+         echo "          <td>$year->total</td>\n";
+         echo "       </tr>\n";
+      }
+      ?>
+   </table>
+   <span class='article_separator'>&nbsp;</span>
 </div>
