@@ -10,7 +10,7 @@ echo "            <div class='article-content'>\n";
 echo "               <table cellpadding='5' cellspacing ='5'>\n";
 foreach ($this->workshops as $eventid => $workshop) {
 	echo "                  <tr>\n";
-	echo "                     <td>" . $workshop["workshopname"] . "</td>\n";
+	echo "                     <td><h5>" . $workshop["workshopname"] . "</h5></td>\n";
 	echo "                     <td>" . $workshop["timename"] . "</td>\n";
 	if($workshop["capacity"] != 0) {
 		echo "                     <td>" . count($workshop["attendees"]) . "/" . $workshop["capacity"] . "</td>\n";
