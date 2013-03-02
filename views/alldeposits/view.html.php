@@ -34,14 +34,14 @@ class muusla_reportsViewalldeposits extends JView
       $this->assignRef('checks', $model->getCharges("1001,1006"));
       $this->assignRef('creditcards', $model->getCharges("1007,1016"));
       $this->assignRef('cash', $model->getCharges("1017"));
-      	
+       
 
       parent::display($tpl);
    }
 
    function getSafe($obj)
    {
-      return htmlspecialchars(trim($obj), ENT_QUOTES);
+      return htmlspecialchars(trim(JRequest::getVar($obj)), ENT_QUOTES);
    }
 
 }

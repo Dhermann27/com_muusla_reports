@@ -42,9 +42,9 @@
       <tr>
          <th>Year</th>
          <th>New Campers</th>
-         <th>Old Campers<br />1-3 Years Missing
+         <th>Old Campers<br />1 Year Missing
          </th>
-         <th>Very Old Campers<br />4+ Years Missing
+         <th>Very Old Campers<br />2 or More Years Missing
          </th>
          <th>Campers Lost</th>
          <th>Total</th>
