@@ -56,7 +56,7 @@ class muusla_reportsModelallledger extends JModel
 
 	function getPollyRegistration() {
 		$db =& JFactory::getDBO();
-		$query = "SELECT mp.registration_amount amount, CONCAT(mp.firstname, ' ', mp.lastname) fullname FROM muusa_credits_v mp WHERE mp.name LIKE 'Polly%' ORDER BY mp.lastname, mp.firstname";
+		$query = "SELECT mp.registration_amount amount, CONCAT(mp.firstname, ' ', mp.lastname) fullname FROM muusa_credits_v mp WHERE mp.positionname LIKE 'Polly%' ORDER BY mp.lastname, mp.firstname";
 		$db->setQuery($query);
 		return $db->loadObjectList();
 	}
@@ -91,7 +91,7 @@ class muusla_reportsModelallledger extends JModel
 
 	function getPollyHousing() {
 		$db =& JFactory::getDBO();
-		$query = "SELECT IFNULL(SUM(sub.amount),0) FROM (SELECT mp.housing_amount amount FROM muusa_credits_v mp WHERE mp.name LIKE 'Polly%') sub ";
+		$query = "SELECT IFNULL(SUM(sub.amount),0) FROM (SELECT mp.housing_amount amount FROM muusa_credits_v mp WHERE mp.positionname LIKE 'Polly%') sub ";
 		$db->setQuery($query);
 		return $db->loadObjectList();
 	}
