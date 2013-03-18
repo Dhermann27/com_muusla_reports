@@ -14,13 +14,15 @@ echo "                     <td>First Name</td>\n";
 echo "                     <td>Program</td>\n";
 echo "                     <td>Birthdate</td>\n";
 echo "                     <td>Room Number</td>\n";
+echo "                     <td>Staff Position(s)</td>\n";
 echo "                  </tr>\n";
 $count = 0;
 foreach ($this->campers as $familyid => $camper) {
 	echo "                  <tr>\n";
 	echo "                     <td colspan='2'><h4>" . $camper["familyname"] . "</h4></td>\n";
 	echo "                     <td colspan='2'>" . $camper['city'] . ", " . $camper['statecd'] . "</td>\n";
-	echo "                     <td align='right'><a href='index.php?option=com_muusla_database&task=save&view=camperdetails&Itemid=71&editcamper=" . $camper['familyid'] . "'>Application</a></td>\n";
+	echo "                     <td align='right'><a href='" . JURI::root(true) . "/index.php/register?editcamper=" . $camper['familyid'] . "'>Registration Form</a></td>\n";
+	echo "                     <td align='right'><a href='" . JURI::root(true) . "/index.php/register-alias/workshops?editcamper=" . $camper['familyid'] . "'>Workshop Selection</a></td>\n";
 	echo "                  </tr>\n";
 	if($camper['children']) {
 		foreach($camper['children'] as $child) {
@@ -30,7 +32,8 @@ foreach ($this->campers as $familyid => $camper) {
 			echo "                     <td>$child->firstname</i></td>\n";
 			echo "                     <td>$child->programname</i></td>\n";
 			echo "                     <td>$child->birthdate</i></td>\n";
-			echo "                     <td align='right'>$child->roomnbr</i></td>\n";
+			echo "                     <td align='center'>$child->roomnbr</i></td>\n";
+			echo "                     <td align='right'>$child->positionname</i></td>\n";
 			echo "                  </tr>\n";
 		}
 	}

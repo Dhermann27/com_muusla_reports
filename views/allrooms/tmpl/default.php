@@ -42,7 +42,7 @@ foreach ($this->campers as $camper) {
 	echo "                     <td>$camper->programname</td>\n";
 	echo "                     <td>$camper->birthdate</td>\n";
 	if($camper->camperid) {
-		echo "                     <td><a href='index.php?option=com_muusla_database&task=save&view=camperdetails&Itemid=71&editcamper=$camper->camperid'>Details</a></td>\n";
+	echo "                     <td align='right'><a href='" . JURI::root(true) . "/index.php/register?editcamper=" . $camper['familyid'] . "'>Registration Form</a></td>\n";
 	}
 	echo "                  </tr>\n";
 	if($camper->hohid == 0) {
