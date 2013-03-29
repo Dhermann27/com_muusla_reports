@@ -18,7 +18,7 @@ class muusla_reportsModelalldeposits extends JModel
 {
 	function getCharges($types) {
 		$db =& JFactory::getDBO();
-		$query = "SELECT mc.firstname, mc.lastname, mr.amount, mr.memo FROM muusa_campers mc, muusa_charges mr, muusa_currentyear my WHERE mc.camperid=mr.camperid AND mr.fiscalyear=my.year AND mr.is_deposited IS NULL AND mr.chargetypeid IN ($types) ORDER BY mc.lastname, mc.firstname";
+		$query = "SELECT mf.familyname, mr.camperid, mr.amount, mr.memo FROM muusa_family mf, muusa_charges_v mr WHERE mf.familyid=mr.familyid AND mr.is_deposited IS NULL AND mr.chargetypeid IN ($types) ORDER BY mf.familyname";
 		$db->setQuery($query);
 		return $db->loadObjectList();
 	}

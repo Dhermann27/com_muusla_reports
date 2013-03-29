@@ -22,7 +22,7 @@ foreach ($this->campers as $familyid => $camper) {
 	echo "                     <td colspan='2'><h4>" . $camper["familyname"] . "</h4></td>\n";
 	echo "                     <td colspan='2'>" . $camper['city'] . ", " . $camper['statecd'] . "</td>\n";
 	echo "                     <td align='right'><a href='" . JURI::root(true) . "/index.php/register?editcamper=" . $camper['familyid'] . "'>Registration Form</a></td>\n";
-	echo "                     <td align='right'><a href='" . JURI::root(true) . "/index.php/register-alias/workshops?editcamper=" . $camper['familyid'] . "'>Workshop Selection</a></td>\n";
+	echo "                     <td align='right'><a href='" . JURI::root(true) . "/index.php/register-alias/workshops?editcamper=" . $camper['familyid'] . "'>Workshop/Staff Selection</a></td>\n";
 	echo "                  </tr>\n";
 	if($camper['children']) {
 		foreach($camper['children'] as $child) {

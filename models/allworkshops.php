@@ -28,7 +28,7 @@ class muusla_reportsModelallworkshops extends JModel
     
    function getAttendees() {
       $db =& JFactory::getDBO();
-      $query = "SELECT ma.eventid eventid, mc.camperid camperid, CONCAT(mc.lastname, ', ', mc.firstname) fullname, ma.choicenbr choicenbr, ma.is_leader is_leader, mc.email email FROM muusa_attendees ma, muusa_campers_v mc WHERE ma.fiscalyearid=mc.fiscalyearid ORDER BY ma.is_leader DESC, mc.postmark, ma.choicenbr";
+      $query = "SELECT ma.eventid eventid, mc.familyid, mc.camperid, CONCAT(mc.lastname, ', ', mc.firstname) fullname, ma.choicenbr choicenbr, ma.is_leader is_leader, mc.email email FROM muusa_attendees ma, muusa_campers_v mc WHERE ma.fiscalyearid=mc.fiscalyearid ORDER BY ma.is_leader DESC, mc.postmark, ma.choicenbr";
       $db->setQuery($query);
       return $db->loadObjectList();
    }
