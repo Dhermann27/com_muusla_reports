@@ -15,14 +15,25 @@ class muusla_reportsViewallexceptions extends JView
 {
    function display($tpl = null) {
       $model =& $this->getModel();
+      $user =& JFactory::getUser();
+      $ids = JRequest::getVar($this->getSafe("id"));
+      if($ids && in_array("8", $user->groups)) {
+         $model->dupe($ids);
+      }
+      $this->assignRef('family', $model->getOrphanFamily());
+      $this->assignRef('orphans', $model->getOrphans());
       $this->assignRef('registrationFees', $model->getRegistrationFees());
       $this->assignRef('housingFees', $model->getHousingFees());
-      $this->assignRef('programs', $model->getPrograms());
-      $this->assignRef('programFees', $model->getProgramFees());
+      $this->assignRef('programs', $model->getProgramFees());
       $this->assignRef('rateFees', $model->getRateFees());
       $this->assignRef('dupeCampers', $model->getDuplicateCampers());
 
       parent::display($tpl);
+   }
+    
+   function getSafe($obj)
+   {
+      return htmlspecialchars(trim($obj), ENT_QUOTES);
    }
 
 }

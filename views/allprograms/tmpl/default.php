@@ -11,7 +11,7 @@
       $count = 0;
       foreach ($this->programs as $program) {
          echo "                  <tr>\n";
-         echo "                     <td colspan='6'><h3>$program->name</h3></td>\n";
+         echo "                     <td colspan='7'><h3>$program->name</h3></td>\n";
          echo "                  </tr>\n";
          echo "                  <tr>\n";
          echo "                     <td>Gender</td>\n";
@@ -21,10 +21,14 @@
          if($program->programid != 1005 && $program->programid != 1006) {
             if($program->programid != 1004) {
                echo "                     <td>Grade</td>\n";
+            } else {
+               echo "                     <td>&nbsp;</td>\n";
             }
             echo "                     <td>Parent</td>\n";
          } else {
             if($program->programid != 1004) {
+               echo "                     <td>&nbsp;</td>\n";
+            } else {
                echo "                     <td>&nbsp;</td>\n";
             }
             echo "                     <td>&nbsp;</td>\n";
@@ -44,14 +48,19 @@
                if($program->programid != 1005 && $program->programid != 1006) {
                   if($program->programid != 1004) {
                      echo "                     <td>$camper->grade</td>\n";
+                  } else {
+                     echo "                     <td>&nbsp;</td>\n";
                   }
                   if($camper->sponsor) {
                      echo "                     <td>$camper->sponsor (S)</td>\n";
                   } else {
                      echo "                     <td>$camper->familyname</td>\n";
                   }
+               } else {
+                  echo "                     <td>&nbsp;</td>\n";
+                  echo "                     <td>&nbsp;</td>\n";
                }
-               echo "                     <td align='right'><a href='" . JURI::root(true) . "/index.php/register?editcamper=" . $camper['familyid'] . "'>Registration Form</a></td>\n";
+               echo "                     <td align='right'><a href='" . JURI::root(true) . "/index.php/register?editcamper=$camper->familyid'>Registration Form</a></td>\n";
                echo "                  </tr>\n";
                if($camper->email != "") {
                   $email .= $camper->email . "; \n";
@@ -67,7 +76,7 @@
          echo "                     <td>&nbsp;</td>\n";
          echo "                  </tr>\n";
          echo "                  <tr>\n";
-         echo "                     <td colspan='6'>E-mail Distribution List<br />$email</td>\n";
+         echo "                     <td colspan='7'>E-mail Distribution List<br />$email</td>\n";
          echo "                  </tr>\n";
       }
       echo "               </table>\n";

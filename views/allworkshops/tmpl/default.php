@@ -1,4 +1,5 @@
-<?php defined('_JEXEC') or die('Restricted access'); ?>
+<?php defined('_JEXEC') or die('Restricted access');
+$user =& JFactory::getUser();?>
 <div id="ja-content">
    <div class="componentheading">All Workshops and Workshop Attendees</div>
    <table class="blog" cellpadding="0" cellspacing="0">
@@ -30,9 +31,13 @@
                } else {
                   echo "                  <tr style='font-size:.9em;'>\n";
                }
-               echo "                     <td>$attendee->fullname</i></td>\n";
-               echo "                     <td>$attendee->email</i></td>\n";
-               echo "                     <td align='right'><a href='" . JURI::root(true) . "/index.php/register-alias/workshops?editcamper=$attendee->familyid'>Workshop/Staff Selection</a></td>\n";
+               echo "                     <td>$attendee->fullname</td>\n";
+               echo "                     <td>$attendee->email</td>\n";
+               if(in_array("8", $user->groups) || in_array("10", $user->groups)) {
+                  echo "                     <td align='right'><a href='" . JURI::root(true) . "/index.php/register-alias/workshops?editcamper=$attendee->familyid'>Workshop/Staff Selection</a></td>\n";
+               } else {
+                  echo "                     <td>&nbsp;</td>\n";
+               }
                echo "                  </tr>\n";
             }
          }
