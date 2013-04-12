@@ -21,9 +21,9 @@ class muusla_reportsModelalloutstanding extends JModel
 {
 	function getCampers() {
 		$db =& JFactory::getDBO();
-		$query = "SELECT familyid, familyname, 0 totallater, 0 totalnow FROM muusa_family";
+		$query = "SELECT familyid, familyname, 0 totallater, 0 totalnow FROM muusa_family ORDER BY familyname";
 		$db->setQuery($query);
-		return $db->loadAssocList("camperid");
+		return $db->loadAssocList("familyid");
 	}
 
 	function getCharges() {
