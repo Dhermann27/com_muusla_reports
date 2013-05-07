@@ -15,7 +15,7 @@ class muusla_reportsViewallcampers extends JView
 {
    function display($tpl = null) {
       $model =& $this->getModel();
-      $campers = $model->getCampers();
+      $campers = $model->getCampers($this->getSafe("sort") == "1" ? "ORDER BY postmark DESC" : "");
       foreach($model->getChildren() as $child) {
          if($campers[$child->familyid]["children"] == null) {
             $campers[$child->familyid]["children"] = array($child);
@@ -23,9 +23,15 @@ class muusla_reportsViewallcampers extends JView
             array_push($campers[$child->familyid]["children"], $child);
          }
       }
+      $this->assignRef('sort', $this->getSafe("sort"));
       $this->assignRef('campers', $campers);
 
       parent::display($tpl);
+   }
+
+   function getSafe($obj)
+   {
+      return htmlspecialchars(trim(JRequest::getVar($obj)), ENT_QUOTES);
    }
 
 }

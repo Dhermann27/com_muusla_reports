@@ -1,8 +1,8 @@
 <?php defined('_JEXEC') or die('Restricted access');
 $user =& JFactory::getUser();?>
 <div id="ja-content">
-   <div class="componentheading">All Current Exceptions</div>
-   <table class="blog" cellpadding="0" cellspacing="0">
+   <div class="componentheading">Current Exceptions</div>
+   <table class="blog">
       <?php
       echo "      <tr>\n";
       echo "         <td valign='top'>\n";
@@ -10,7 +10,7 @@ $user =& JFactory::getUser();?>
       echo "            <div class='article-content'>\n";
       echo "               <h3>Orphan Family</h3>\n";
       foreach ($this->family as $charge) {
-         echo "               <a href='" . JURI::root(true) . "/index.php/register?editcamper=$charge->camperid'>$charge->familyname</a><br />\n";
+         echo "               $charge->familyname: $charge->familyid<br />\n";
       }
       echo "               <h3>Orphan Children</h3>\n";
       foreach ($this->orphans as $charge) {

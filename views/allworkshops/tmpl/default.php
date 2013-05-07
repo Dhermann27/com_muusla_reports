@@ -34,7 +34,7 @@ $user =& JFactory::getUser();?>
                echo "                     <td>$attendee->fullname</td>\n";
                echo "                     <td>$attendee->email</td>\n";
                if(in_array("8", $user->groups) || in_array("10", $user->groups)) {
-                  echo "                     <td align='right'><a href='" . JURI::root(true) . "/index.php/register-alias/workshops?editcamper=$attendee->familyid'>Workshop/Staff Selection</a></td>\n";
+                  echo "                     <td align='right'><a href='" . JURI::root(true) . "/index.php/registration/workshops?editcamper=$attendee->familyid'>Workshop/Staff Selection</a></td>\n";
                } else {
                   echo "                     <td>&nbsp;</td>\n";
                }

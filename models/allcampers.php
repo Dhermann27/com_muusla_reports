@@ -19,9 +19,9 @@ jimport( 'joomla.application.component.model' );
  */
 class muusla_reportsModelallcampers extends JModel
 {
-   function getCampers() {
+   function getCampers($order) {
       $db =& JFactory::getDBO();
-      $query = "SELECT familyid, familyname, city, statecd FROM muusa_family_v";
+      $query = "SELECT familyid, familyname, city, statecd FROM muusa_family_v $order";
       $db->setQuery($query);
       return $db->loadAssocList("familyid");
    }
