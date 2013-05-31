@@ -15,7 +15,7 @@ class muusla_reportsViewallcampers extends JView
 {
    function display($tpl = null) {
       $model =& $this->getModel();
-      $campers = $model->getCampers($this->getSafe("sort") == "1" ? "ORDER BY postmark DESC" : "");
+      $campers = $model->getCampers($this->getSafe("sort") == "1" ? "ORDER BY postmark DESC" : "ORDER BY familyname");
       foreach($model->getChildren() as $child) {
          if($campers[$child->familyid]["children"] == null) {
             $campers[$child->familyid]["children"] = array($child);

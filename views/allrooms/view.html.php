@@ -15,7 +15,15 @@ class muusla_reportsViewallrooms extends JView
 {
    function display($tpl = null) {
       $model =& $this->getModel();
-      $this->assignRef('campers', $model->getCampers());
+      $buildings = $model->getBuildings();
+      foreach($model->getRooms() as $room) {
+         $room->campers = array();
+         $buildings[$room->buildingid]["rooms"][$room->roomid] = $room;
+      }
+      foreach($model->getCampers() as $camper) {
+         array_push($buildings[$camper->buildingid]["rooms"][$camper->roomid]->campers, $camper);
+      }
+      $this->assignRef('buildings', $buildings);
 
       parent::display($tpl);
    }

@@ -39,7 +39,7 @@ $user =& JFactory::getUser();?>
       echo "               <h3>Duplicate Campers</h3>\n";
       foreach ($this->dupeCampers as $charge) {
          if(in_array("8", $user->groups)) {
-            echo "               <a href='" . JURI::root(true) . "/index.php/administration/reports/exceptions?id=$charge->oldid,$charge->newid'>$charge->fullname ($charge->oldid: $charge->numcharges)</a> -> <a href='" . JURI::root(true) . "/index.php/administration/reports/exceptions?id=$charge->newid,$charge->oldid'>$charge->newid: $charge->numdharges</a><br />\n";
+            echo "               <a href='" . JURI::root(true) . "/index.php/admin/reports/exceptions?id=$charge->oldid,$charge->newid'>$charge->fullname ($charge->oldid: $charge->numcharges)</a> -> <a href='" . JURI::root(true) . "/index.php/administration/reports/exceptions?id=$charge->newid,$charge->oldid'>$charge->newid: $charge->numdharges</a><br />\n";
          } else {
             echo "               $charge->fullname<br />\n";
          }

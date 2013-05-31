@@ -19,9 +19,23 @@ jimport( 'joomla.application.component.model' );
  */
 class muusla_reportsModelallrooms extends JModel
 {
+   function getBuildings() {
+      $db =& JFactory::getDBO();
+      $query = "SELECT buildingid, name FROM muusa_buildings";
+      $db->setQuery($query);
+      return $db->loadAssocList("buildingid");
+   }
+   
+   function getRooms() {
+      $db =& JFactory::getDBO();
+      $query = "SELECT buildingid, roomid, roomnbr FROM muusa_rooms WHERE is_workshop=0 ORDER BY roomnbr";
+      $db->setQuery($query);
+      return $db->loadObjectList();
+   }
+   
    function getCampers() {
       $db =& JFactory::getDBO();
-      $query = "SELECT mc.camperid, mb.buildingid, mb.name buildingname, mr.roomnbr, mc.firstname, mc.lastname, mc.birthdate, mc.programname FROM (muusa_rooms mr, muusa_buildings mb) LEFT JOIN muusa_campers_v mc ON mr.roomid=mc.roomid WHERE mr.buildingid=mb.buildingid AND mr.is_workshop=0 ORDER BY mr.buildingid, mr.roomnbr, mc.familyid, STR_TO_DATE(birthdate, '%m/%d/%Y')";
+      $query = "SELECT mcv.familyid, mcv.camperid, mr.buildingid, mcv.roomid, mcv.firstname, mcv.lastname, mcv.birthdate, mcv.programname FROM muusa_rooms mr, muusa_campers_v mcv WHERE mr.roomid=mcv.roomid AND mcv.roomid!=0 ORDER BY STR_TO_DATE(mcv.birthdate, '%m/%d/%Y')";
       $db->setQuery($query);
       return $db->loadObjectList();
    }
