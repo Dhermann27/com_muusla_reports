@@ -28,7 +28,7 @@ class muusla_reportsModelallfirsttime extends JModel
     
    function getChildren($year, $campers) {
       $db =& JFactory::getDBO();
-      $query = "SELECT mc.camperid, mc.familyid, mc.firstname, mc.lastname, mc.programname, mc.birthdate, mc.roomnbr, IF((SELECT COUNT(*) FROM muusa_attendees ma WHERE mc.camperid=ma.camperid)>0,1,0) workshops FROM muusa_campers_v mc, muusa_fiscalyear mf, muusa_currentyear my WHERE mc.camperid=mf.camperid AND mf.fiscalyear>=(my.year-$year) AND mc.camperid NOT IN ($campers) GROUP BY mc.camperid HAVING COUNT(*)=1 ORDER BY STR_TO_DATE(birthdate, '%m/%d/%Y')";
+      $query = "SELECT mc.camperid, mc.familyid, mc.firstname, mc.lastname, mc.programname, mc.email, mc.birthdate, mc.roomnbr, IFNULL((SELECT COUNT(*) FROM muusa_attendees ma WHERE mc.fiscalyearid=ma.fiscalyearid),0) workshops FROM muusa_campers_v mc, muusa_fiscalyear mf, muusa_currentyear my WHERE mc.camperid=mf.camperid AND mf.fiscalyear>=(my.year-$year) AND mc.camperid NOT IN ($campers) GROUP BY mc.camperid HAVING COUNT(*)=1 ORDER BY STR_TO_DATE(birthdate, '%m/%d/%Y')";
       $db->setQuery($query);
       return $db->loadObjectList();
    }
