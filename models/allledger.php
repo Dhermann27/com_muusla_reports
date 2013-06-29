@@ -112,14 +112,14 @@ class muusla_reportsModelallledger extends JModel
 
 	function getScholarships() {
 		$db =& JFactory::getDBO();
-		$query = "SELECT CONCAT(mc.firstname, ' ', mc.lastname) fullname, ABS(mr.amount) amount FROM muusa_campers mc, muusa_charges_v mr WHERE mc.camperid=mr.camperid AND mr.chargetypeid=1013";
+		$query = "SELECT CONCAT(firstname, ' ', lastname) fullname, ABS(housing_amount+registration_amount) amount FROM muusa_scholarships_v WHERE name='MUUSA Scholarship' ORDER BY lastname, firstname";
 		$db->setQuery($query);
 		return $db->loadObjectList();
 	}
 
 	function getYScholarships() {
 		$db =& JFactory::getDBO();
-		$query = "SELECT CONCAT(mc.firstname, ' ', mc.lastname) fullname, ABS(mr.amount) amount FROM muusa_campers mc, muusa_charges_v mr WHERE mc.camperid=mr.camperid AND mr.chargetypeid=1019";
+		$query = "SELECT CONCAT(firstname, ' ', lastname) fullname, ABS(housing_amount+registration_amount) amount FROM muusa_scholarships_v WHERE name='YMCA Scholarship' ORDER BY lastname, firstname";
 		$db->setQuery($query);
 		return $db->loadObjectList();
 	}

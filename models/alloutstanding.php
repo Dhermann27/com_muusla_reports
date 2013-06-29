@@ -39,4 +39,11 @@ class muusla_reportsModelalloutstanding extends JModel
 		$db->setQuery($query);
 		return $db->loadObjectList();
 	}
+
+	function getScholarships() {
+		$db =& JFactory::getDBO();
+		$query = "SELECT familyid, camperid, registration_amount, housing_amount FROM muusa_scholarships_v";
+		$db->setQuery($query);
+		return $db->loadObjectList();
+	}
 }

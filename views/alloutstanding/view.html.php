@@ -26,6 +26,10 @@ class muusla_reportsViewalloutstanding extends JView
 			$campers[$credit->familyid]["totalnow"] -= (float)preg_replace("/,/", "",  $credit->registration_amount+$credit->housing_amount);
 			$campers[$credit->familyid]["totallater"] -= (float)preg_replace("/,/", "",  $credit->registration_amount+$credit->housing_amount);
 		}
+		foreach($model->getScholarships() as $credit) {
+			$campers[$credit->familyid]["totalnow"] -= (float)preg_replace("/,/", "",  $credit->registration_amount+$credit->housing_amount);
+			$campers[$credit->familyid]["totallater"] -= (float)preg_replace("/,/", "",  $credit->registration_amount+$credit->housing_amount);
+		}
 		$this->assignRef('charges', $campers);
 
 		parent::display($tpl);

@@ -22,8 +22,8 @@
       $fullcount = 0;
       $nowcount = 0;
       foreach ($this->charges as $camperid => $camper) {
-         if($camper["totallater"] > 0) {
-            $fullcount += $camper["totallater"];
+         if(abs($camper["totallater"]) != 0.0) {
+            $fullcount += max($camper["totallater"],0);
             $nowcount += max($camper["totalnow"],0);
             echo "                  <tr>\n";
             echo "                     <td>" . $camper["familyname"] . "</td>\n";
