@@ -22,7 +22,7 @@
       $fullcount = 0;
       $nowcount = 0;
       foreach ($this->charges as $camperid => $camper) {
-         if(abs($camper["totallater"]) != 0.0) {
+         if((int)($camper["totallater"] * 100) != 0) {
             $fullcount += max($camper["totallater"],0);
             $nowcount += max($camper["totalnow"],0);
             echo "                  <tr>\n";
