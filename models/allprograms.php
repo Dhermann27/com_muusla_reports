@@ -28,7 +28,7 @@ class muusla_reportsModelallprograms extends JModel
    
    function getPrograms() {
       $db =& JFactory::getDBO();
-      $query = "SELECT programid, name FROM muusa_programs WHERE name!='Adult' ORDER BY name";
+      $query = "SELECT id, name FROM muusa_program p, muusa_year y WHERE y.year>=p.start_year AND y.year<=p.end_year AND name!='Adult' ORDER BY name";
       $db->setQuery($query);
       return $db->loadObjectList();
    }
