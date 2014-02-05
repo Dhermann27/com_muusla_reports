@@ -16,19 +16,19 @@ jimport( 'joomla.application.component.model' );
  */
 class muusla_reportsModelalldeposits extends JModel
 {
-	function getCharges($types) {
-		$db =& JFactory::getDBO();
-		$query = "SELECT mf.familyname, mr.camperid, mr.amount, mr.memo FROM muusa_family mf, muusa_charges_v mr WHERE mf.familyid=mr.familyid AND mr.is_deposited IS NULL AND mr.chargetypeid IN ($types) ORDER BY mf.familyname";
-		$db->setQuery($query);
-		return $db->loadObjectList();
-	}
-	
-	function setCharges($types) {
-		$db =& JFactory::getDBO();
-		$user =& JFactory::getUser();
-		$query = "UPDATE muusa_charges SET is_deposited=CURRENT_DATE, modified_by='$user->username', modified_at=CURRENT_TIMESTAMP WHERE is_deposited IS NULL AND chargetypeid IN ($types) AND fiscalyear=(SELECT year FROM muusa_currentyear)";
-		$db->setQuery($query);
-		$db->query();
-		return;
-	}
+   function getCharges($types) {
+      $db =& JFactory::getDBO();
+      $query = "SELECT f.name, th.camperid, th.amount, th.memo FROM muusa_family f, muusa_thisyear_charge th WHERE f.id=th.familyid AND th.is_deposited IS NULL AND th.chargetypeid IN ($types) ORDER BY f.name";
+      $db->setQuery($query);
+      return $db->loadObjectList();
+   }
+
+   function setCharges($types) {
+      $db =& JFactory::getDBO();
+      $user =& JFactory::getUser();
+      $query = "UPDATE muusa_charge SET is_deposited=CURRENT_DATE, created_by='$user->username' WHERE is_deposited IS NULL AND chargetypeid IN ($types) AND year=(SELECT year FROM muusa_year WHERE is_current=1)";
+      $db->setQuery($query);
+      $db->query();
+      return;
+   }
 }

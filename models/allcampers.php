@@ -21,14 +21,14 @@ class muusla_reportsModelallcampers extends JModel
 {
    function getCampers($order) {
       $db =& JFactory::getDBO();
-      $query = "SELECT familyid, familyname, city, statecd FROM muusa_family_v $order";
+      $query = "SELECT id, name, city, statecd FROM muusa_thisyear_family $order";
       $db->setQuery($query);
-      return $db->loadAssocList("familyid");
+      return $db->loadAssocList("id");
    }
-    
+
    function getChildren() {
       $db =& JFactory::getDBO();
-      $query = "SELECT mc.camperid, mc.familyid, mc.firstname, mc.lastname, mc.programname, mc.postmark, mc.birthdate, mc.roomnbr, GROUP_CONCAT(mv.positionname) positionname FROM muusa_campers_v mc LEFT JOIN muusa_positions_v mv ON mc.camperid=mv.camperid GROUP BY mc.camperid ORDER BY STR_TO_DATE(birthdate, '%m/%d/%Y')";
+      $query = "SELECT tc.id, tc.familyid, tc.firstname, tc.lastname, tc.programname, DATE_FORMAT(tc.birthdate, '%m/%d/%Y') birthdate, tc.roomnbr FROM muusa_thisyear_camper tc ORDER BY tc.birthdate";
       $db->setQuery($query);
       return $db->loadObjectList();
    }

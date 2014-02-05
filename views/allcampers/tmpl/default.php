@@ -10,7 +10,7 @@ $user =& JFactory::getUser();?>
                   <div align="right">
                      <a
                         href="<?php echo $_SERVER["PHP_SELF"]; echo $this->sort == "1" ? "" : "?sort=1";?>">Sort
-                        By <?php echo $this->sort == "1" ? "Last Name" : "Postmark"?>
+                        By <?php echo $this->sort == "1" ? "Last Name" : "Paid Date"?>
                      </a>
                   </div>
                   <table>
@@ -20,18 +20,17 @@ $user =& JFactory::getUser();?>
                         <td>Program</td>
                         <td>Postmark / Birthdate</td>
                         <td>Room Number</td>
-                        <td>Staff Position(s)</td>
                      </tr>
                      <?php 
                      $count = 0;
                      foreach ($this->campers as $familyid => $camper) {
                         echo "                  <tr>\n";
-                        echo "                     <td colspan='2'><h4>" . $camper["familyname"] . "</h4></td>\n";
-                        echo "                     <td>" . $camper['city'] . ", " . $camper['statecd'] . "</td>\n";
-                        echo "                     <td>" . substr($camper['children'][0]->postmark, 0, 5) . "</td>\n";
+                        echo "                     <td colspan='2'><h4>" . $camper["name"] . "</h4></td>\n";
+                        echo "                     <td>" . $camper["city"] . ", " . $camper["statecd"] . "</td>\n";
+                        echo "                     <td>Paid Date Will Go Here</td>\n";
                         if(in_array("8", $user->groups) || in_array("10", $user->groups)) {
                            echo "                     <td align='right'><a href='" . JURI::root(true) . "/index.php/register?editcamper=" . $camper['familyid'] . "'>Registration Form</a></td>\n";
-                           echo "                     <td align='right'><a href='" . JURI::root(true) . "/index.php/registration/workshops?editcamper=" . $camper['familyid'] . "'>Workshop/Staff Selection</a></td>\n";
+                           echo "                     <td align='right'><a href='" . JURI::root(true) . "/index.php/registration/workshops?editcamper=" . $camper['familyid'] . "'>Workshop Selection</a></td>\n";
                         } else {
                            echo "                     <td>&nbsp;</td>\n";
                            echo "                     <td>&nbsp;</td>\n";
@@ -46,7 +45,6 @@ $user =& JFactory::getUser();?>
                               echo "                     <td>$child->programname</i></td>\n";
                               echo "                     <td>$child->birthdate</i></td>\n";
                               echo "                     <td align='center'>$child->roomnbr</i></td>\n";
-                              echo "                     <td align='right'>$child->positionname</i></td>\n";
                               echo "                  </tr>\n";
                            }
                         }

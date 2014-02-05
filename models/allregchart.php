@@ -25,7 +25,7 @@ class muusla_reportsModelallregchart extends JModel
 	
 	function getData() {
 		$db =& JFactory::getDBO();
-		$query = "SELECT mf.fiscalyear, RIGHT(mf.postmark,5) date, (SELECT COUNT(*) FROM muusa_fiscalyear my WHERE mf.fiscalyear=my.fiscalyear AND RIGHT(my.postmark, 5)<=RIGHT(mf.postmark, 5)) count FROM muusa_fiscalyear mf WHERE mf.fiscalyear>2008 GROUP BY mf.postmark ORDER BY mf.postmark";
+		$query = "SELECT ya.year, RIGHT(mf.postmark,5) date, (SELECT COUNT(*) FROM muusa_fiscalyear my WHERE mf.fiscalyear=my.fiscalyear AND RIGHT(my.postmark, 5)<=RIGHT(mf.postmark, 5)) count FROM muusa_fiscalyear mf WHERE mf.fiscalyear>2008 GROUP BY mf.postmark ORDER BY mf.postmark";
 		$db->setQuery($query);
 		return $db->loadObjectList();
 	}
