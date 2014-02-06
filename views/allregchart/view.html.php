@@ -17,10 +17,10 @@ class muusla_reportsViewallregchart extends JView
       $model =& $this->getModel();
       $years[]= array();
       foreach($model->getData() as $date) {
-      	if($years[$date->fiscalyear] == null) {
-      		$years[$date->fiscalyear] = array($date);
+      	if($years[$date->year] == null) {
+      		$years[$date->year] = array($date);
       	} else {
-      		array_push($years[$date->fiscalyear], $date);
+      		array_push($years[$date->year], $date);
       	}
       }
       unset($years[0]);

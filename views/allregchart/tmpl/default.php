@@ -38,7 +38,7 @@
 			}
 		};
         </script>
-   <table width="80%" align="center">
+   <table>
       <tr>
          <th>Year</th>
          <th>New Campers</th>
@@ -62,5 +62,6 @@
       }
       ?>
    </table>
+   <i>Previous Year's Total - Lost Campers - Total Campers + New Campers + Old Campers + Very Old Campers = 0</i>
    <span class='article_separator'>&nbsp;</span>
 </div>
