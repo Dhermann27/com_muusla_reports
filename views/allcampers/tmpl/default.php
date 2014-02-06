@@ -1,5 +1,8 @@
 <?php defined('_JEXEC') or die('Restricted access'); 
 $user =& JFactory::getUser();?>
+<link type="text/css"
+   href="<?php echo JURI::root(true);?>/components/com_muusla_application/css/application.css"
+   rel="stylesheet" />
 <div id="ja-content">
    <div class="componentheading">All Registered Campers</div>
    <table class="blog">
@@ -13,7 +16,7 @@ $user =& JFactory::getUser();?>
                         By <?php echo $this->sort == "1" ? "Last Name" : "Paid Date"?>
                      </a>
                   </div>
-                  <table>
+                  <table id="muusaApp">
                      <tr>
                         <td>Last Name</td>
                         <td>First Name</td>

@@ -1,4 +1,7 @@
 <?php defined('_JEXEC') or die('Restricted access'); ?>
+<link type="text/css"
+   href="<?php echo JURI::root(true);?>/components/com_muusla_application/css/application.css"
+   rel="stylesheet" />
 <script
    src="<?php echo JURI::root(true);?>/components/com_muusla_reports/js/raphael-min.js"></script>
 <script
@@ -38,7 +41,7 @@
 			}
 		};
         </script>
-   <table>
+   <table id="muusaApp">
       <tr>
          <th>Year</th>
          <th>New Campers</th>
@@ -52,7 +55,7 @@
       <?php
       foreach ($this->table as $year) {
          echo "       <tr align='center'>\n";
-         echo "          <td><b>$year->fiscalyear</b></td>\n";
+         echo "          <td><b>$year->year</b></td>\n";
          echo "          <td><font color='green'>+$year->newcampers</font></td>\n";
          echo "          <td><font color='green'>+$year->oldcampers</font></td>\n";
          echo "          <td><font color='green'>+$year->voldcampers</font></td>\n";
@@ -62,6 +65,7 @@
       }
       ?>
    </table>
-   <i>Previous Year's Total - Lost Campers - Total Campers + New Campers + Old Campers + Very Old Campers = 0</i>
-   <span class='article_separator'>&nbsp;</span>
+   <i>Previous Year's Total - Lost Campers - Total Campers + New Campers
+      + Old Campers + Very Old Campers = 0</i> <span
+      class='article_separator'>&nbsp;</span>
 </div>
