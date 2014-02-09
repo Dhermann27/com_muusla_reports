@@ -31,23 +31,24 @@ $user =& JFactory::getUser();?>
                         echo "                     <td colspan='2'><h4>" . $camper["name"] . "</h4></td>\n";
                         echo "                     <td>" . $camper["city"] . ", " . $camper["statecd"] . "</td>\n";
                         echo "                     <td>" . ($camper["paydate"] != null ? $camper["paydate"] : "Unpaid") . "</td>\n";
+                        echo "                     <td>&nbsp;</td>\n";
                         if(in_array("8", $user->groups) || in_array("10", $user->groups)) {
-                           echo "                     <td align='right'><a href='" . JURI::root(true) . "/index.php/register?editcamper=" . $camper['id'] . "'>Registration Form</a></td>\n";
-                           //echo "                     <td align='right'><a href='" . JURI::root(true) . "/index.php/registration/workshops?editcamper=" . $camper['id'] . "'>Workshop Selection</a></td>\n";
+                           echo "                     <td align='right' nowrap='nowrap'><a class='tooltip' href='" . JURI::root(true) . "/index.php/register?editcamper=" . $camper['id'] . "' title='Registration Form'><i class='fa fa-user fa-2x'></i></a>\n";
+                           echo "                     <a href='" . JURI::root(true) . "/index.php/registration/workshops?editcamper=" . $camper['id'] . "' title='Workshop Selection'><i class='fa fa-tasks fa-2x'></i></a>\n";
+                           echo "                     <a href='" . JURI::root(true) . "/index.php/rooms?editcamper=" . $camper['id'] . "' title='Assign Room'><i class='fa fa-home fa-2x'></i></a></td>\n";
                         } else {
                            echo "                     <td>&nbsp;</td>\n";
-                           //  echo "                     <td>&nbsp;</td>\n";
                         }
                         echo "                  </tr>\n";
                         if($camper['children']) {
                            foreach($camper['children'] as $child) {
                               $count++;
                               echo "                  <tr style='font-size:.9em'>\n";
-                              echo "                     <td>$child->lastname</i></td>\n";
-                              echo "                     <td>$child->firstname</i></td>\n";
-                              echo "                     <td>$child->programname</i></td>\n";
-                              echo "                     <td>$child->birthdate</i></td>\n";
-                              echo "                     <td align='center'>$child->roomnbr</i></td>\n";
+                              echo "                     <td>$child->lastname</td>\n";
+                              echo "                     <td>$child->firstname</td>\n";
+                              echo "                     <td>$child->programname</td>\n";
+                              echo "                     <td>$child->birthdate</td>\n";
+                              echo "                     <td align='center'>$child->roomnbr</td>\n";
                               echo "                  </tr>\n";
                            }
                         }
