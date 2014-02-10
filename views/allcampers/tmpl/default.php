@@ -21,17 +21,16 @@ $user =& JFactory::getUser();?>
                         <td>Last Name</td>
                         <td>First Name</td>
                         <td>Program</td>
-                        <td>Postmark / Birthdate</td>
+                        <td>Paid Date / Birthdate</td>
                         <td>Room Number</td>
                      </tr>
                      <?php 
                      $count = 0;
                      foreach ($this->campers as $familyid => $camper) {
                         echo "                  <tr>\n";
-                        echo "                     <td colspan='2'><h4>" . $camper["name"] . "</h4></td>\n";
+                        echo "                     <td><h4>" . $camper["name"] . "</h4></td>\n";
                         echo "                     <td>" . $camper["city"] . ", " . $camper["statecd"] . "</td>\n";
-                        echo "                     <td>" . ($camper["paydate"] != null ? $camper["paydate"] : "Unpaid") . "</td>\n";
-                        echo "                     <td>&nbsp;</td>\n";
+                        echo "                     <td colspan='2' align='center'>" . ($camper["paydate"] != null ? $camper["paydate"] : "Unpaid") . "</td>\n";
                         if(in_array("8", $user->groups) || in_array("10", $user->groups)) {
                            echo "                     <td align='right' nowrap='nowrap'><a class='tooltip' href='" . JURI::root(true) . "/index.php/register?editcamper=" . $camper['id'] . "' title='Registration Form'><i class='fa fa-user fa-2x'></i></a>\n";
                            echo "                     <a href='" . JURI::root(true) . "/index.php/registration/workshops?editcamper=" . $camper['id'] . "' title='Workshop Selection'><i class='fa fa-tasks fa-2x'></i></a>\n";
