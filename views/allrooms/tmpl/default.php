@@ -1,12 +1,16 @@
-<?php defined('_JEXEC') or die('Restricted access'); ?>
+<?php defined('_JEXEC') or die('Restricted access');
+$user =& JFactory::getUser();?>
+<link type="text/css"
+   href="<?php echo JURI::root(true);?>/components/com_muusla_application/css/application.css"
+   rel="stylesheet" />
 <div id="ja-content">
-   <div class="componentheading">All Current Registered Campers by Room</div>
-   <table class="blog" cellpadding="0" cellspacing="0">
+   <div class="componentheading">All Registered Campers by Room</div>
+   <table class="blog">
       <tr>
-         <td valign='top'>
+         <td valign="top">
             <div>
-               <div class='article-content'>
-                  <table cellpadding='5' cellspacing='5'>
+               <div class="article-content">
+                  <table id="muusaApp">
                      <tr>
                         <td>&nbsp;</td>
                         <td>Room Number</td>
@@ -33,8 +37,14 @@
                                  echo "                     <td>$camper->firstname</td>\n";
                                  echo "                     <td>$camper->lastname</td>\n";
                                  echo "                     <td>$camper->programname</td>\n";
-                                 echo "                     <td>$camper->birthdate</td>\n";
-                                 echo "                     <td align='right'><a href='" . JURI::root(true) . "/index.php/register?editcamper=$camper->familyid'>Registration Form</a></td>\n";
+                                 echo "                     <td>$camper->birthday</td>\n";
+                                 if(in_array("8", $user->groups) || in_array("10", $user->groups)) {
+                                    echo "                     <td align='right' nowrap='nowrap'><a class='tooltip' href='" . JURI::root(true) . "/index.php/register?editcamper=$camper->familyid' title='Registration Form'><i class='fa fa-user fa-2x'></i></a>\n";
+                                    echo "                     <a href='" . JURI::root(true) . "/index.php/registration/workshops?editcamper=$camper->familyid' title='Workshop Selection'><i class='fa fa-tasks fa-2x'></i></a>\n";
+                                    echo "                     <a href='" . JURI::root(true) . "/index.php/rooms?editcamper=$camper->familyid' title='Assign Room'><i class='fa fa-home fa-2x'></i></a></td>\n";
+                                 } else {
+                                    echo "                     <td>&nbsp;</td>\n";
+                                 }
                               }
                            }
                         }

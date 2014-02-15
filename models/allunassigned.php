@@ -21,7 +21,7 @@ class muusla_reportsModelallunassigned extends JModel
 {   
    function getCampers() {
       $db =& JFactory::getDBO();
-      $query = "SELECT mc.firstname, mc.lastname, mc.programname, mc.familyid FROM muusa_campers_v mc WHERE mc.roomid=0";
+      $query = "SELECT familyid, firstname, lastname, familyname, programname FROM muusa_thisyear_camper WHERE roomid=0 ORDER BY familyname, birthdate";
       $db->setQuery($query);
       return $db->loadObjectList();
    }

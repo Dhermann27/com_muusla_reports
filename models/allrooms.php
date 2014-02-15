@@ -21,21 +21,21 @@ class muusla_reportsModelallrooms extends JModel
 {
    function getBuildings() {
       $db =& JFactory::getDBO();
-      $query = "SELECT buildingid, name FROM muusa_buildings";
+      $query = "SELECT id, name FROM muusa_building";
       $db->setQuery($query);
-      return $db->loadAssocList("buildingid");
+      return $db->loadAssocList("id");
    }
    
    function getRooms() {
       $db =& JFactory::getDBO();
-      $query = "SELECT buildingid, roomid, roomnbr FROM muusa_rooms WHERE is_workshop=0 ORDER BY roomnbr";
+      $query = "SELECT buildingid, id roomid, roomnbr FROM muusa_room WHERE is_workshop=0 ORDER BY roomnbr";
       $db->setQuery($query);
       return $db->loadObjectList();
    }
    
    function getCampers() {
       $db =& JFactory::getDBO();
-      $query = "SELECT mcv.familyid, mcv.camperid, mr.buildingid, mcv.roomid, mcv.firstname, mcv.lastname, mcv.birthdate, mcv.programname FROM muusa_rooms mr, muusa_campers_v mcv WHERE mr.roomid=mcv.roomid AND mcv.roomid!=0 ORDER BY STR_TO_DATE(mcv.birthdate, '%m/%d/%Y')";
+      $query = "SELECT tc.familyid, r.buildingid, tc.roomid, tc.firstname, tc.lastname, tc.birthday, tc.programname FROM muusa_thisyear_camper tc, muusa_room r WHERE tc.roomid=r.id AND tc.roomid!=0 ORDER BY tc.birthdate";
       $db->setQuery($query);
       return $db->loadObjectList();
    }
