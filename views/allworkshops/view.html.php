@@ -13,44 +13,47 @@ jimport( 'joomla.application.component.view');
  */
 class muusla_reportsViewallworkshops extends JView
 {
-	function display($tpl = null) {
-		$model =& $this->getModel();
-		$workshops = $model->getWorkshops();
-		$found[][] = array();
-		foreach($model->getAttendees() as $attendee) {
-			if($this->noConflict($found[$workshops[$attendee->eventid]["starttime"]][$attendee->camperid], $workshops[$attendee->eventid]["days"])) {
-				if($workshops[$attendee->eventid]["attendees"] == null) {
-					$workshops[$attendee->eventid]["attendees"] = array($attendee);
-					$found[$workshops[$attendee->eventid]["starttime"]][$attendee->camperid] = $this->orDays($found[$workshops[$attendee->eventid]["starttime"]][$attendee->camperid], $workshops[$attendee->eventid]["days"]);
-				} elseif ($workshops[$attendee->eventid]["capacity"] == 0 || count($workshops[$attendee->eventid]["attendees"]) < $workshops[$attendee->eventid]["capacity"]) {
-					array_push($workshops[$attendee->eventid]["attendees"], $attendee);
-					$found[$workshops[$attendee->eventid]["starttime"]][$attendee->camperid] = $this->orDays($found[$workshops[$attendee->eventid]["starttime"]][$attendee->camperid], $workshops[$attendee->eventid]["days"]);
-				} elseif($workshops[$attendee->eventid]["waitlist"] == null) {
-					$workshops[$attendee->eventid]["waitlist"] = array($attendee);
-				} else {
-					array_push($workshops[$attendee->eventid]["waitlist"], $attendee);
-				}
-			}
-		}
-		$this->assignRef('workshops', $workshops);
+   function display($tpl = null) {
+      $model =& $this->getModel();
+      $workshops = $model->getWorkshops();
+      $found[][] = array();
+      foreach($model->getAttendees() as $attendee) {
+         if($this->noConflict($found[$workshops[$attendee->workshopid]["starttime"]][$attendee->id], $workshops[$attendee->workshopid]["days"])) {
+            if($workshops[$attendee->workshopid]["attendees"] == null) {
+               $workshops[$attendee->workshopid]["attendees"] = array($attendee);
+               $found[$workshops[$attendee->workshopid]["starttime"]][$attendee->id] = $this->orDays($found[$workshops[$attendee->workshopid]["starttime"]][$attendee->id], $workshops[$attendee->workshopid]["days"]);
+            } elseif ($workshops[$attendee->workshopid]["capacity"] == 0 || count($workshops[$attendee->workshopid]["attendees"]) < $workshops[$attendee->workshopid]["capacity"]) {
+               array_push($workshops[$attendee->workshopid]["attendees"], $attendee);
+               $found[$workshops[$attendee->workshopid]["starttime"]][$attendee->id] = $this->orDays($found[$workshops[$attendee->workshopid]["starttime"]][$attendee->id], $workshops[$attendee->workshopid]["days"]);
+            } elseif($workshops[$attendee->workshopid]["waitlist"] == null) {
+               $workshops[$attendee->workshopid]["waitlist"] = array($attendee->firstname . " " . $attendee->lastname);
+            } else {
+               array_push($workshops[$attendee->workshopid]["waitlist"], $attendee->firstname . " " . $attendee->lastname);
+            }
+         }
+      }
+      foreach($workshops as $workshop) {
+         $model->updateWorkshop($workshop["id"], count($workshop["attendees"]));
+      }
+      $this->assignRef("workshops", $workshops);
 
-		parent::display($tpl);
-	}
+      parent::display($tpl);
+   }
 
-	function noConflict($a, $b) {
-		for($i=0; $i<7; $i++) {
-			if($a[$i] == "1" && $b[$i] == "1") return false;
-		}
-		return true;
-	}
+   function noConflict($a, $b) {
+      for($i=0; $i<7; $i++) {
+         if($a[$i] == "1" && $b[$i] == "1") return false;
+      }
+      return true;
+   }
 
-	function orDays($a, $b) {
-		$ret = "";
-		for($i=0; $i<7; $i++) {
-			$ret .= ($a[$i] == "1" || $b[$i] == "1") ? "1" : "0";
-		}
-		return $ret;
-	}
+   function orDays($a, $b) {
+      $ret = "";
+      for($i=0; $i<7; $i++) {
+         $ret .= ($a[$i] == "1" || $b[$i] == "1") ? "1" : "0";
+      }
+      return $ret;
+   }
 
 }
 ?>

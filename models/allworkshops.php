@@ -21,15 +21,24 @@ class muusla_reportsModelallworkshops extends JModel
 {
    function getWorkshops() {
       $db =& JFactory::getDBO();
-      $query = "SELECT me.eventid eventid, CONCAT(me.su, me.m, me.t, me.w, me.th, me.f, me.sa) days, CONCAT(IF(me.su,'S',''),IF(me.m,'M',''),IF(me.t,'Tu',''),IF(me.w,'W',''),IF(me.th,'Th',''),IF(me.f,'F',''),IF(me.sa,'S','')) dispdays, CONCAT(mb.name, ' ', mr.roomnbr) roomname, mt.name timename, me.name workshopname, me.capacity capacity, mt.starttime starttime FROM muusa_events me, muusa_buildings mb, muusa_rooms mr, muusa_times mt WHERE me.roomid=mr.roomid AND mr.buildingid=mb.buildingid AND me.timeid=mt.timeid ORDER by mt.starttime, me.name";
+      $query = "SELECT w.id, CONCAT(w.su, w.m, w.t, w.w, w.th, w.f, w.sa) days, CONCAT(IF(w.su,'S',''),IF(w.m,'M',''),IF(w.t,'Tu',''),IF(w.w,'W',''),IF(w.th,'Th',''),IF(w.f,'F',''),IF(w.sa,'S','')) dispdays, CONCAT(b.name, ' ', r.roomnbr) roomname, t.name timename, w.name workshopname, w.capacity, t.starttime FROM (muusa_workshop w, muusa_timeslot t) LEFT JOIN (muusa_building b, muusa_room r) ON w.roomid=r.id AND r.buildingid=b.id WHERE w.timeslotid=t.id ORDER by t.starttime, w.name";
       $db->setQuery($query);
-      return $db->loadAssocList("eventid");
+      return $db->loadAssocList("id");
    }
-    
+
    function getAttendees() {
       $db =& JFactory::getDBO();
-      $query = "SELECT ma.eventid eventid, mc.familyid, mc.camperid, CONCAT(mc.lastname, ', ', mc.firstname) fullname, ma.choicenbr choicenbr, ma.is_leader is_leader, mc.email email FROM muusa_attendees ma, muusa_campers_v mc WHERE ma.fiscalyearid=mc.fiscalyearid ORDER BY ma.is_leader DESC, mc.postmark, ma.choicenbr";
+      $query = "SELECT yw.workshopid, c.familyid, c.id, c.firstname, c.lastname, yw.choicenbr, yw.is_leader, c.email FROM muusa_yearattending__workshop yw, muusa_yearattending ya, muusa_camper c, muusa_year y WHERE yw.yearattendingid=ya.id AND ya.camperid=c.id AND ya.year=y.year AND y.is_current=1 ORDER BY yw.is_leader DESC, IFNULL(ya.paydate, NOW()), yw.choicenbr";
       $db->setQuery($query);
       return $db->loadObjectList();
+   }
+
+   function updateWorkshop($id, $enrolled) {
+      $db =& JFactory::getDBO();
+      $obj = new stdClass;
+      $obj->id = $id;
+      $obj->enrolled = $enrolled;
+      $obj->created_by = "workshops";
+      $db->updateObject("muusa_workshop", $obj, "id");
    }
 }

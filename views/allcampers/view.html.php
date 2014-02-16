@@ -18,6 +18,7 @@ class muusla_reportsViewallcampers extends JView
       $campers = $model->getCampers($this->getSafe("sort") == "1" ? "ORDER BY paydate DESC" : "ORDER BY name");
       foreach($model->getChildren() as $child) {
          if($campers[$child->familyid]["children"] == null) {
+            $campers[$child->familyid]["paydate"] = $child->paydate;
             $campers[$child->familyid]["children"] = array($child);
          } else {
             array_push($campers[$child->familyid]["children"], $child);
