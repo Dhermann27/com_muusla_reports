@@ -19,9 +19,16 @@ jimport( 'joomla.application.component.model' );
  */
 class muusla_reportsModelallrooms extends JModel
 {
+   function getYears() {
+      $db =& JFactory::getDBO();
+      $query = "SELECT year, is_current FROM muusa_year WHERE year>2008 ORDER BY year";
+      $db->setQuery($query);
+      return $db->loadObjectList();
+   }
+   
    function getBuildings() {
       $db =& JFactory::getDBO();
-      $query = "SELECT id, name FROM muusa_building";
+      $query = "SELECT id, name, 0 count FROM muusa_building";
       $db->setQuery($query);
       return $db->loadAssocList("id");
    }
@@ -33,9 +40,9 @@ class muusla_reportsModelallrooms extends JModel
       return $db->loadObjectList();
    }
    
-   function getCampers() {
+   function getCampers($year) {
       $db =& JFactory::getDBO();
-      $query = "SELECT tc.familyid, r.buildingid, tc.roomid, tc.firstname, tc.lastname, tc.birthday, tc.programname FROM muusa_thisyear_camper tc, muusa_room r WHERE tc.roomid=r.id AND tc.roomid!=0 ORDER BY tc.birthdate";
+      $query = "SELECT bc.familyid, r.buildingid, bc.roomid, bc.firstname, bc.lastname, bc.birthday, bc.programname FROM muusa_byyear_camper bc, muusa_room r WHERE bc.roomid=r.id AND bc.roomid!=0 AND bc.year=$year ORDER BY bc.birthdate";
       $db->setQuery($query);
       return $db->loadObjectList();
    }

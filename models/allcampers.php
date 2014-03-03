@@ -21,7 +21,7 @@ class muusla_reportsModelallcampers extends JModel
 {
    function getCampers($order) {
       $db =& JFactory::getDBO();
-      $query = "SELECT tf.id, tf.name, tf.city, tf.statecd FROM muusa_thisyear_family tf, muusa_year y WHERE y.is_current=1 $order";
+      $query = "SELECT tf.id, tf.name, tf.city, tf.statecd, tf.paydate FROM muusa_thisyear_family tf, muusa_year y WHERE y.is_current=1 $order";
       $db->setQuery($query);
       return $db->loadAssocList("id");
    }

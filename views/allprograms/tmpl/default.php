@@ -18,15 +18,15 @@ $user =& JFactory::getUser();?>
                         echo "                     <td>First Name</td>\n";
                         echo "                     <td>Last Name</td>\n";
                         echo "                     <td>Age</td>\n";
-                        if($program->programid != 1005 && $program->programid != 1006) {
-                           if($program->programid != 1007) {
+                        if($program->id != 1005 && $program->id != 1006) {
+                           if($program->id != 1007) {
                               echo "                     <td>Grade</td>\n";
                            } else {
                               echo "                     <td>&nbsp;</td>\n";
                            }
                            echo "                     <td>Parent</td>\n";
                         } else {
-                           if($program->programid != 1007) {
+                           if($program->id != 1007) {
                               echo "                     <td>&nbsp;</td>\n";
                            } else {
                               echo "                     <td>&nbsp;</td>\n";

@@ -15,15 +15,22 @@ class muusla_reportsViewallrooms extends JView
 {
    function display($tpl = null) {
       $model =& $this->getModel();
-      $buildings = $model->getBuildings();
-      foreach($model->getRooms() as $room) {
-         $room->campers = array();
-         $buildings[$room->buildingid]["rooms"][$room->roomid] = $room;
+      $years = $model->getYears();
+      foreach($years as $year) {
+         $year->buildings = $model->getBuildings();
+         foreach($model->getRooms() as $room) {
+            $room->campers = array();
+            if($year->buildings[$room->buildingid]["name"] == "") {
+               $year->buildings[$room->buildingid]["name"] = "Unknown";
+            }
+            $year->buildings[$room->buildingid]["rooms"][$room->roomid] = $room;
+         }
+         foreach($model->getCampers($year->year) as $camper) {
+            $year->buildings[$camper->buildingid]["count"]++;
+            array_push($year->buildings[$camper->buildingid]["rooms"][$camper->roomid]->campers, $camper);
+         }
       }
-      foreach($model->getCampers() as $camper) {
-         array_push($buildings[$camper->buildingid]["rooms"][$camper->roomid]->campers, $camper);
-      }
-      $this->assignRef('buildings', $buildings);
+      $this->assignRef('years', $years);
 
       parent::display($tpl);
    }
