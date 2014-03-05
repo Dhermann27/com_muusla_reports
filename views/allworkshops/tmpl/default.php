@@ -18,12 +18,16 @@ $user =& JFactory::getUser();?>
                   <?php foreach ($this->times as $timeslotid => $time) {?>
                   <div id="time<?php echo $timeslotid;?>">
                      <h5>
-                        <?php echo $timeslotid != 1020 ? " (" . $time["start"] . " - " . $time["end"] . ")" : "";?>
+                        <?php echo $timeslotid != 1020 ? $time["start"] . " - " . $time["end"] : "";?>
                      </h5>
                      <?php if(count($time["shops"]) > 0) {
-                        foreach($time["shops"] as $id => $workshop) {?>
+                        foreach($time["shops"] as $id => $workshop) {
+                           $style = "";
+                           if (count($workshop["attendees"]) / intval($workshop["capacity"]) >= .75) {
+                              $style = " style='background: " . (count($workshop["attendees"]) >= intval($workshop["capacity"]) ? "#cd0a0a" : "#e3a345") . ";'";
+                           }?>
                      <div class="workshop">
-                        <h4>
+                        <h4<?php echo $style;?>>
                            <?php echo $workshop["workshopname"];?>
                         </h4>
                         <div>
