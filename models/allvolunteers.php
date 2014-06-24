@@ -19,9 +19,16 @@ jimport( 'joomla.application.component.model' );
  */
 class muusla_reportsModelallvolunteers extends JModel
 {
-   function getCampers() {
+   function getPositions() {
       $db =& JFactory::getDBO();
-      $query = "SELECT mc.camperid, CONCAT(mc.lastname, ', ', mc.firstname) fullname, mc.name, mc.email FROM muusa_volunteers_v mc ORDER by mc.name, mc.lastname, mc.firstname";
+      $query = "SELECT id, name FROM muusa_volunteerposition ORDER BY name";
+      $db->setQuery($query);
+      return $db->loadObjectList();
+   }
+    
+   function getCampers($id) {
+      $db =& JFactory::getDBO();
+      $query = "SELECT familyid, firstname, lastname, email FROM muusa_thisyear_volunteer WHERE volunteerpositionid=$id ORDER BY lastname, firstname";
       $db->setQuery($query);
       return $db->loadObjectList();
    }

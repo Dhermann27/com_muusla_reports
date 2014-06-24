@@ -1,4 +1,8 @@
-<?php defined('_JEXEC') or die('Restricted access'); ?>
+<?php defined('_JEXEC') or die('Restricted access'); 
+$user =& JFactory::getUser();?>
+<link type="text/css"
+   href="<?php echo JURI::root(true);?>/components/com_muusla_application/css/application.css"
+   rel="stylesheet" />
 <div id="ja-content">
    <div class="componentheading">All Registered First Time Campers</div>
    <table class="blog">
@@ -6,62 +10,41 @@
          <td valign='top'>
             <div>
                <div class='article-content'>
-                  <table>
-                     <tr>
-                        <td colspan='6'><h4>First Time</h4></td>
-                     </tr>
+                  <table id="muusaApp">
                      <tr>
                         <td>Last Name</td>
                         <td>First Name</td>
-                        <td>Program</td>
-                        <td>Birthdate</td>
-                        <td>Room Number</td>
-                        <td>Workshop Signups</td>
+                        <td>Family Name</td>
+                        <td>&nbsp;</td>
                      </tr>
-                     <?php
-                     foreach ($this->campers as $familyid => $camper) {
-                        if($camper['children']) {
-                           echo "                  <tr>\n";
-                           echo "                     <td colspan='2'><h4>" . $camper["familyname"] . "</h4></td>\n";
-                           echo "                     <td colspan='2'>" . $camper['city'] . ", " . $camper['statecd'] . "</td>\n";
-                           echo "                     <td align='right'><a href='" . JURI::root(true) . "/index.php/register?editcamper=" . $camper['familyid'] . "'>Registration Form</a></td>\n";
-                           echo "                  </tr>\n";
-                           foreach($camper['children'] as $child) {
-                              $count++;
-                              echo "                  <tr style='font-size:.9em'>\n";
-                              echo "                     <td>$child->lastname</i></td>\n";
-                              echo "                     <td>$child->firstname</i></td>\n";
-                              echo "                     <td>$child->programname</i></td>\n";
-                              echo "                     <td>$child->birthdate</i></td>\n";
-                              echo "                     <td align='center'>$child->roomnbr</i></td>\n";
-                              echo "                     <td align='right'>$child->workshops</td>\n";
-                              echo "                  </tr>\n";
-                           }
+                     <?php 
+                     $count = 0;
+                     foreach ($this->campers as $camper) {
+                        echo "                  <tr>\n";
+                        echo "                     <td>$camper->lastname</td>\n";
+                        echo "                     <td>$camper->firstname</td>\n";
+                        echo "                     <td>($camper->familyname)</td>\n";
+                        if(in_array("8", $user->groups) || in_array("10", $user->groups)) {
+                           echo "                     <td align='right' nowrap='nowrap'><a class='tooltip' href='" . JURI::root(true) . "/index.php/register?editcamper=$camper->familyid' title='Registration Form'><i class='fa fa-user fa-2x'></i></a>\n";
+                           echo "                     <a href='" . JURI::root(true) . "/index.php/registration/workshops?editcamper=$camper->familyid' title='Workshop Selection'><i class='fa fa-tasks fa-2x'></i></a>\n";
+                           echo "                     <a href='" . JURI::root(true) . "/index.php/rooms?editcamper=$camper->familyid' title='Assign Room'><i class='fa fa-home fa-2x'></i></a></td>\n";
+                        } else {
+                           echo "                     <td>&nbsp;</td>\n";
                         }
-                     }
-                     echo "                  <tr><td colspan='6'>Emails: $this->firstemails</td></tr>\n";
-                     echo "                  <tr><td colspan='6'><h4>First Time In Past Three Years</td></tr>\n";
-                     foreach ($this->campers as $familyid => $camper) {
-                        if($camper['tchildren']) {
-                           echo "                  <tr>\n";
-                           echo "                     <td colspan='2'><h4>" . $camper["familyname"] . "</h4></td>\n";
-                           echo "                     <td colspan='2'>" . $camper['city'] . ", " . $camper['statecd'] . "</td>\n";
-                           echo "                     <td align='right'><a href='" . JURI::root(true) . "/index.php/register?editcamper=" . $camper['familyid'] . "'>Registration Form</a></td>\n";
-                           echo "                  </tr>\n";
-                           foreach($camper['tchildren'] as $child) {
-                              $count++;
-                              echo "                  <tr style='font-size:.9em'>\n";
-                              echo "                     <td>$child->lastname</i></td>\n";
-                              echo "                     <td>$child->firstname</i></td>\n";
-                              echo "                     <td>$child->programname</i></td>\n";
-                              echo "                     <td>$child->birthdate</i></td>\n";
-                              echo "                     <td align='center'>$child->roomnbr</i></td>\n";
-                              echo "                     <td align='right'>$child->workshops</td>\n";
-                              echo "                  </tr>\n";
-                           }
-                        }
-                     }
-                     echo "                  <tr><td colspan='6'>Emails: $this->tfirstemails</td></tr>\n";?>
+                        echo "                  </tr>\n";
+                        $count++;
+                     }?>
+                     <tr>
+                        <td colspan='4' align='right'>Total Campers: <?php echo $count;?>
+                        </td>
+                     </tr>
+                     <tr>
+                        <td colspan="4"><hr /></td>
+                     </tr>
+                     <tr>
+                        <td colspan='4'>Distribution List: <?php echo $this->emails;?>
+                        </td>
+                     </tr>
                   </table>
                </div>
                <span class='article_separator'>&nbsp;</span>

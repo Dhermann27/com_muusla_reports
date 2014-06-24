@@ -35,7 +35,7 @@ class muusla_reportsModelallexceptions extends JModel
 
    function getDuplicateCampers() {
       $db =& JFactory::getDBO();
-      $query = "SELECT mc.camperid oldid, (SELECT COUNT(*) FROM muusa_charges_v WHERE camperid=mc.camperid) numcharges, md.camperid newid, (SELECT COUNT(*) FROM muusa_charges_v WHERE camperid=md.camperid) numdharges, CONCAT(mc.lastname, ', ', mc.firstname) fullname FROM muusa_campers mc, muusa_campers md WHERE mc.camperid!=md.camperid AND mc.firstname=md.firstname AND mc.lastname=md.lastname ORDER BY mc.lastname, mc.firstname";
+      $query = "SELECT c.id oldid, (SELECT COUNT(*) FROM muusa_charge h, muusa_year y WHERE h.camperid=c.id AND h.year=y.year AND y.is_current=1) numcharges, cp.id newid, (SELECT COUNT(*) FROM muusa_charge hp, muusa_year yp WHERE hp.camperid=cp.id AND hp.year=yp.year AND yp.is_current=1) numdharges, CONCAT(c.lastname, ', ', c.firstname) fullname FROM muusa_camper c, muusa_camper cp WHERE c.id!=cp.id AND c.firstname=cp.firstname AND c.lastname=cp.lastname ORDER BY c.lastname, c.firstname";
       $db->setQuery($query);
       return $db->loadObjectList();
    }
