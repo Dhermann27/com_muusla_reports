@@ -21,7 +21,7 @@ class muusla_reportsModelalloutstanding extends JModel
 {
    function getFamilies() {
       $db =& JFactory::getDBO();
-      $query = "SELECT f.id, f.name, SUM(th.amount) amount FROM muusa_family f, muusa_thisyear_charge th WHERE f.id=th.familyid GROUP BY f.id ORDER BY f.name, f.statecd, f.city";
+      $query = "SELECT f.id, f.name, SUM(th.amount) amount FROM muusa_family f, muusa_thisyear_charge th WHERE f.id=th.familyid GROUP BY f.id HAVING SUM(th.amount)!=0.0 ORDER BY f.name, f.statecd, f.city";
       $db->setQuery($query);
       return $db->loadObjectList();
    }
