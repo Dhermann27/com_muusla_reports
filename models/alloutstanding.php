@@ -19,24 +19,36 @@ jimport( 'joomla.application.component.model' );
  */
 class muusla_reportsModelalloutstanding extends JModel
 {
-	function getCampers() {
-		$db =& JFactory::getDBO();
-		$query = "SELECT familyid, familyname, 0 totallater, 0 totalnow FROM muusa_family ORDER BY familyname";
-		$db->setQuery($query);
-		return $db->loadAssocList("familyid");
-	}
+   function getFamilies() {
+      $db =& JFactory::getDBO();
+      $query = "SELECT f.id, f.name, SUM(th.amount) amount FROM muusa_family f, muusa_thisyear_charge th WHERE f.id=th.familyid GROUP BY f.id ORDER BY f.name, f.statecd, f.city";
+      $db->setQuery($query);
+      return $db->loadObjectList();
+   }
 
-	function getCharges() {
-		$db =& JFactory::getDBO();
-		$query = "SELECT familyid, camperid, amount, chargetypeid chargetypeid FROM muusa_charges_v mv";
-		$db->setQuery($query);
-		return $db->loadObjectList();
-	}
+   function getChargetypes() {
+      $db =& JFactory::getDBO();
+      $query = "SELECT id, name FROM muusa_chargetype WHERE is_shown=1 ORDER BY name";
+      $db->setQuery($query);
+      return $db->loadObjectList();
+   }
 
-	function getCredits() {
-		$db =& JFactory::getDBO();
-		$query = "SELECT familyid, camperid, registration_amount, housing_amount FROM muusa_credits_v";
-		$db->setQuery($query);
-		return $db->loadObjectList();
-	}
+   function getYear() {
+      $db =& JFactory::getDBO();
+      $query = "SELECT year FROM muusa_year WHERE is_current=1";
+      $db->setQuery($query);
+      return $db->loadResult();
+   }
+
+   function upsertCharge($obj) {
+      $db =& JFactory::getDBO();
+      $user =& JFactory::getUser();
+      $obj->camperid = "&&(SELECT c.id FROM muusa_camper c WHERE c.familyid=$obj->familyid ORDER BY c.birthdate LIMIT 0,1)";
+      unset($obj->familyid);
+      $obj->timestamp = date("Y-m-d");
+      $db->insertObject("muusa_charge", $obj);
+      if($db->getErrorNum()) {
+         JError::raiseError(500, $db->stderr());
+      }
+   }
 }

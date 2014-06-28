@@ -1,51 +1,90 @@
-<?php defined('_JEXEC') or die('Restricted access'); ?>
+<?php defined('_JEXEC') or die('Restricted access');
+$user =& JFactory::getUser();?>
+<link type="text/css"
+   href="<?php echo JURI::root(true);?>/components/com_muusla_application/css/application.css"
+   rel="stylesheet" />
+<script type="text/javascript">
+   jQuery(document).ready(function ($) {
+	    $("#muusaApp .save").button().click(function (event) {
+	    	$("#muusaApp").submit();
+	        event.preventDefault();
+	        return false;
+	    });
+   });
+</script>
 <div id="ja-content">
    <div class="componentheading">All Outstanding Balances</div>
-   <p>
-      <i>Please note that this list may contain people whose final
-         balances are already zero because of housing credits which are
-         ignored on this report.</i>
-   </p>
-   <table class="blog" cellpadding="0" cellspacing="0">
-      <?php
-      echo "      <tr>\n";
-      echo "         <td valign='top'>\n";
-      echo "            <div>\n";
-      echo "            <div class='article-content'>\n";
-      echo "               <table cellpadding='5' cellspacing ='5'>\n";
-      echo "                  <tr>\n";
-      echo "                     <td>Name</td>\n";
-      echo "                     <td>Total Balance</td>\n";
-      echo "                     <td>Total Due Now</td>\n";
-      echo "                     <td>&nbsp;</td>\n";
-      echo "                  </tr>\n";
-      $fullcount = 0;
-      $nowcount = 0;
-      foreach ($this->charges as $camperid => $camper) {
-         if((int)($camper["totallater"] * 100) != 0) {
-            $fullcount += max($camper["totallater"],0);
-            $nowcount += max($camper["totalnow"],0);
-            echo "                  <tr>\n";
-            echo "                     <td>" . $camper["familyname"] . "</td>\n";
-            echo "                     <td>$" . number_format($camper["totallater"], 2) . "</td>\n";
-            echo "                     <td>$" . number_format(max($camper["totalnow"],0), 2) . "</td>\n";
-            echo "                     <td align='right'><a href='" . JURI::root(true) . "/index.php/register?editcamper=" . $camper['familyid'] . "'>Registration Form</a></td>\n";
-            echo "                  </tr>\n";
-         }
-      }
-      echo "                  <tr>\n";
-      echo "                     <td align='right'>Total Outstanding:</td>\n";
-      echo "                     <td>$" . number_format($fullcount, 2) . "</td>\n";
-      echo "                     <td>$" . number_format($nowcount, 2) . "</td>\n";
-      echo "                     <td>&nbsp;</td>\n";
-      echo "                  </tr>\n";
-      echo "               </table>\n";
-      echo "            </div>\n";
-      echo "            <span class='article_separator'>&nbsp;</span>\n";
-      echo "            </div>\n";
-      echo "         </td>\n";
-echo "      </tr>\n";
-?>
-   </table>
+   <table class="blog">
+      <tr>
+         <td valign="top">
+            <div>
+               <div class="article-content">
 
+                  <form id="muusaApp" method="post">
+                     <table>
+                        <tr>
+                           <td>Family Name</td>
+                           <td>Amount</td>
+                           <td>Chargetype</td>
+                           <td>Amount</td>
+                           <td>Memo</td>
+                           <td>&nbsp;</td>
+                        </tr>
+                        <?php 
+                        $total = 0.0;
+                        foreach ($this->families as $family) {?>
+                        <tr>
+                           <td><?php echo $family->name;?> <input
+                              type="hidden"
+                              name="charge-familyid-<?php echo $family->id;?>"
+                              value="<?php echo $family->id;?>" /><input
+                              type="hidden"
+                              name="charge-year-<?php echo $family->id;?>"
+                              value="<?php echo $this->year;?>" />
+                           </td>
+                           <td>$<?php echo number_format($family->amount, 2);?>
+                           </td>
+                           <td><select
+                              name="charge-chargetypeid-<?php echo $family->id;?>"
+                              class="ui-corner-all">
+                                 <?php foreach($this->chargetypes as $chargetype) {
+                                    echo "                     <option value='$chargetype->id'>$chargetype->name</option>\n";
+                                 }?>
+                           </select>
+                           </td>
+                           <td><input type="text"
+                              name="charge-amount-<? echo $family->id;?>"
+                              class="inputtexttiny ui-corner-all" /></td>
+                           <td><input type="text"
+                              name="charge-memo-<? echo $family->id;?>"
+                              class="inputtext ui-corner-all"
+                              value="<?php echo $charge->memo;?>" /></td>
+                           <?php if(in_array("8", $user->groups) || in_array("10", $user->groups)) {
+                              echo "                     <td align='right' nowrap='nowrap'><a class='tooltip' href='" . JURI::root(true) . "/index.php/register?editcamper=$family->id' title='Registration Form'><i class='fa fa-user fa-2x'></i></a>\n";
+                              echo "                     <a href='" . JURI::root(true) . "/index.php/registration/workshops?editcamper=$family->id' title='Workshop Selection'><i class='fa fa-tasks fa-2x'></i></a>\n";
+                              echo "                     <a href='" . JURI::root(true) . "/index.php/rooms?editcamper=$family->id' title='Assign Room'><i class='fa fa-home fa-2x'></i></a></td>\n";
+                           } else {
+                              echo "                     <td>&nbsp;</td>\n";
+                           }
+                           echo "                  </tr>\n";
+                           $total += $family->amount;
+                        }?>
+                        
+                        
+                        <tr>
+                           <td colspan='6' align='right'><strong>Total
+                                 Amount Due: $<?php echo number_format($total, 2);?>
+                           </strong>
+                           </td>
+                        </tr>
+                     </table>
+                     <div class="right">
+                        <button class="save">Save All Charges</button>
+                     </div>
+                  </form>
+               </div>
+            </div>
+         </td>
+      </tr>
+   </table>
 </div>
