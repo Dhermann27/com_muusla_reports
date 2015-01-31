@@ -17,17 +17,17 @@ jimport( 'joomla.application.component.model' );
  * @package    muusla_reports
  * @subpackage Components
  */
-class muusla_reportsModelallvolunteers extends JModel
+class muusla_reportsModelallvolunteers extends JModelItem
 {
    function getPositions() {
-      $db =& JFactory::getDBO();
+      $db = JFactory::getDBO();
       $query = "SELECT id, name FROM muusa_volunteerposition ORDER BY name";
       $db->setQuery($query);
       return $db->loadObjectList();
    }
-    
+
    function getCampers($id) {
-      $db =& JFactory::getDBO();
+      $db = JFactory::getDBO();
       $query = "SELECT familyid, firstname, lastname, email FROM muusa_thisyear_volunteer WHERE volunteerpositionid=$id ORDER BY lastname, firstname";
       $db->setQuery($query);
       return $db->loadObjectList();

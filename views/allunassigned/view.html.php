@@ -11,10 +11,10 @@ jimport( 'joomla.application.component.view');
  *
  * @package		muusla_reports
  */
-class muusla_reportsViewallunassigned extends JView
+class muusla_reportsViewallunassigned extends JViewLegacy
 {
    function display($tpl = null) {
-      $model =& $this->getModel();
+      $model = $this->getModel();
       $this->assignRef('campers', $model->getCampers());
 
       parent::display($tpl);

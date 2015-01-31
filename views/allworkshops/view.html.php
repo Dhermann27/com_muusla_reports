@@ -11,10 +11,10 @@ jimport( 'joomla.application.component.view');
  *
  * @package		muusla_reports
  */
-class muusla_reportsViewallworkshops extends JView
+class muusla_reportsViewallworkshops extends JViewLegacy
 {
    function display($tpl = null) {
-      $model =& $this->getModel();
+      $model = $this->getModel();
       $workshops = $model->getWorkshops();
       $found[][] = array();
       foreach($model->getAttendees() as $attendee) {

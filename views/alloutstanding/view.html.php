@@ -11,11 +11,11 @@ jimport( 'joomla.application.component.view');
  *
  * @package		muusla_reports
  */
-class muusla_reportsViewalloutstanding extends JView
+class muusla_reportsViewalloutstanding extends JViewLegacy
 {
    function display($tpl = null) {
-      $model =& $this->getModel();
-      $user =& JFactory::getUser();
+      $model = $this->getModel();
+      $user = JFactory::getUser();
       $calls[][] = array();
       foreach(JRequest::get() as $key=>$value) {
          if(preg_match('/^(\w+)-(\w+)-(\d+)$/', $key, $objects)) {

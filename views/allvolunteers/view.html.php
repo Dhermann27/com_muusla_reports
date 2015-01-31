@@ -11,10 +11,10 @@ jimport( 'joomla.application.component.view');
  *
  * @package		muusla_reports
  */
-class muusla_reportsViewallvolunteers extends JView
+class muusla_reportsViewallvolunteers extends JViewLegacy
 {
    function display($tpl = null) {
-      $model =& $this->getModel();
+      $model = $this->getModel();
       $positions = $model->getPositions();
       if(count($positions) > 0) {
          foreach($positions as $position) {

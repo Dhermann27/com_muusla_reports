@@ -11,11 +11,11 @@ jimport( 'joomla.application.component.view');
  *
  * @package		muusla_reports
  */
-class muusla_reportsViewallexceptions extends JView
+class muusla_reportsViewallexceptions extends JViewLegacy
 {
    function display($tpl = null) {
-      $model =& $this->getModel();
-      $user =& JFactory::getUser();
+      $model = $this->getModel();
+      $user = JFactory::getUser();
       $ids = JRequest::getVar($this->getSafe("id"));
       if($ids && in_array("8", $user->groups)) {
          $model->dupe($ids);
@@ -30,7 +30,7 @@ class muusla_reportsViewallexceptions extends JView
 
       parent::display($tpl);
    }
-    
+
    function getSafe($obj)
    {
       return htmlspecialchars(trim($obj), ENT_QUOTES);

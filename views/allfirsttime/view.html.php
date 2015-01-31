@@ -11,10 +11,10 @@ jimport( 'joomla.application.component.view');
  *
  * @package		muusla_reports
  */
-class muusla_reportsViewallfirsttime extends JView
+class muusla_reportsViewallfirsttime extends JViewLegacy
 {
    function display($tpl = null) {
-      $model =& $this->getModel();
+      $model = $this->getModel();
       $campers = $model->getCampers();
       $emails = array();
       if(count($campers) > 0) {

@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <metadata>
-        <layout title="All Unassigned Campers Report">
-                <message>
+	<layout title="All Unassigned Campers Report">
+		<message>
                         <![CDATA[COM_MUUSA_REPORTS_ALLUNASSIGNED_VIEW_DEFAULT_DESC]]>
-                </message>
-        </layout>
+		</message>
+	</layout>
 </metadata>

@@ -11,10 +11,10 @@ jimport( 'joomla.application.component.view');
  *
  * @package		muusla_reports
  */
-class muusla_reportsViewallemptys extends JView
+class muusla_reportsViewallemptys extends JViewLegacy
 {
    function display($tpl = null) {
-      $model =& $this->getModel();
+      $model = $this->getModel();
       $this->assignRef('rooms', $model->getRooms());
 
       parent::display($tpl);

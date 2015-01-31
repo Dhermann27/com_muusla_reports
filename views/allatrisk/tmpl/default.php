@@ -1,5 +1,5 @@
 <?php defined('_JEXEC') or die('Restricted access'); 
-$user =& JFactory::getUser();?>
+$user = JFactory::getUser();?>
 <link type="text/css"
    href="<?php echo JURI::root(true);?>/components/com_muusla_application/css/application.css"
    rel="stylesheet" />
@@ -29,7 +29,7 @@ $user =& JFactory::getUser();?>
                         echo "                     <td>$camper->firstname</td>\n";
                         echo "                     <td>($camper->familyname)</td>\n";
                         if(in_array("8", $user->groups) || in_array("10", $user->groups)) {
-                           echo "                     <td align='right' nowrap='nowrap'><a class='tooltip' href='" . JURI::root(true) . "/index.php/register?editcamper=$camper->familyid' title='Registration Form'><i class='fa fa-user fa-2x'></i></a>\n";
+                           echo "                     <td align='right' nowrap='nowrap'><a class='myhidden' href='" . JURI::root(true) . "/index.php/register?editcamper=$camper->familyid' title='Registration Form'><i class='fa fa-user fa-2x'></i></a>\n";
                            echo "                     <a href='" . JURI::root(true) . "/index.php/registration/workshops?editcamper=$camper->familyid' title='Workshop Selection'><i class='fa fa-tasks fa-2x'></i></a>\n";
                            echo "                     <a href='" . JURI::root(true) . "/index.php/rooms?editcamper=$camper->familyid' title='Assign Room'><i class='fa fa-home fa-2x'></i></a></td>\n";
                         } else {
@@ -57,7 +57,7 @@ $user =& JFactory::getUser();?>
                         echo "                     <td>$camper->firstname</td>\n";
                         echo "                     <td>($camper->familyname)</td>\n";
                         if(in_array("8", $user->groups) || in_array("10", $user->groups)) {
-                           echo "                     <td align='right' nowrap='nowrap'><a class='tooltip' href='" . JURI::root(true) . "/index.php/register?editcamper=$camper->familyid' title='Registration Form'><i class='fa fa-user fa-2x'></i></a>\n";
+                           echo "                     <td align='right' nowrap='nowrap'><a class='myhidden' href='" . JURI::root(true) . "/index.php/register?editcamper=$camper->familyid' title='Registration Form'><i class='fa fa-user fa-2x'></i></a>\n";
                            echo "                     <a href='" . JURI::root(true) . "/index.php/registration/workshops?editcamper=$camper->familyid' title='Workshop Selection'><i class='fa fa-tasks fa-2x'></i></a>\n";
                            echo "                     <a href='" . JURI::root(true) . "/index.php/rooms?editcamper=$camper->familyid' title='Assign Room'><i class='fa fa-home fa-2x'></i></a></td>\n";
                         } else {
@@ -85,7 +85,7 @@ $user =& JFactory::getUser();?>
                         echo "                     <td>$camper->firstname</td>\n";
                         echo "                     <td>($camper->familyname)</td>\n";
                         if(in_array("8", $user->groups) || in_array("10", $user->groups)) {
-                           echo "                     <td align='right' nowrap='nowrap'><a class='tooltip' href='" . JURI::root(true) . "/index.php/register?editcamper=$camper->familyid' title='Registration Form'><i class='fa fa-user fa-2x'></i></a>\n";
+                           echo "                     <td align='right' nowrap='nowrap'><a class='myhidden' href='" . JURI::root(true) . "/index.php/register?editcamper=$camper->familyid' title='Registration Form'><i class='fa fa-user fa-2x'></i></a>\n";
                            echo "                     <a href='" . JURI::root(true) . "/index.php/registration/workshops?editcamper=$camper->familyid' title='Workshop Selection'><i class='fa fa-tasks fa-2x'></i></a>\n";
                            echo "                     <a href='" . JURI::root(true) . "/index.php/rooms?editcamper=$camper->familyid' title='Assign Room'><i class='fa fa-home fa-2x'></i></a></td>\n";
                         } else {

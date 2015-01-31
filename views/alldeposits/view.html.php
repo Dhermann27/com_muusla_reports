@@ -11,10 +11,10 @@ jimport( 'joomla.application.component.view');
  *
  * @package		muusla_reports
  */
-class muusla_reportsViewalldeposits extends JView
+class muusla_reportsViewalldeposits extends JViewLegacy
 {
    function display($tpl = null) {
-      $model =& $this->getModel();
+      $model = $this->getModel();
       $user = JFactory::getUser();
       if(in_array("8", $user->groups) || in_array("10", $user->groups)) {
          if($this->getSafe("paypals") == "1") {

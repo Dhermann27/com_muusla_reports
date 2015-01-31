@@ -1,5 +1,5 @@
 <?php defined('_JEXEC') or die('Restricted access');
-$user =& JFactory::getUser();?>
+$user = JFactory::getUser();?>
 <div id="ja-content">
    <div class="componentheading">Current Exceptions</div>
    <table class="blog">

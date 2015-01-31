@@ -11,10 +11,10 @@ jimport( 'joomla.application.component.view');
  *
  * @package		muusla_reports
  */
-class muusla_reportsViewallcampers extends JView
+class muusla_reportsViewallcampers extends JViewLegacy
 {
    function display($tpl = null) {
-      $model =& $this->getModel();
+      $model = $this->getModel();
       $campers = $model->getCampers($this->getSafe("sort") == "1" ? "ORDER BY tf.paydate DESC" : "ORDER BY tf.name");
       foreach($model->getChildren() as $child) {
          if($campers[$child->familyid]["children"] == null) {

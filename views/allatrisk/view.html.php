@@ -11,10 +11,10 @@ jimport( 'joomla.application.component.view');
  *
  * @package		muusla_reports
  */
-class muusla_reportsViewallatrisk extends JView
+class muusla_reportsViewallatrisk extends JViewLegacy
 {
    function display($tpl = null) {
-      $model =& $this->getModel();
+      $model = $this->getModel();
       $this->assignRef('unreg', $model->getUnregcampers());
       $this->assignRef('unass', $model->getUnasscampers());
       $this->assignRef('lost', $model->getLostcampers());

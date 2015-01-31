@@ -11,17 +11,17 @@ jimport( 'joomla.application.component.view');
  *
  * @package		muusla_reports
  */
-class muusla_reportsViewallregchart extends JView
+class muusla_reportsViewallregchart extends JViewLegacy
 {
    function display($tpl = null) {
-      $model =& $this->getModel();
+      $model = $this->getModel();
       $years[]= array();
       foreach($model->getData() as $date) {
-      	if($years[$date->year] == null) {
-      		$years[$date->year] = array($date);
-      	} else {
-      		array_push($years[$date->year], $date);
-      	}
+         if($years[$date->year] == null) {
+            $years[$date->year] = array($date);
+         } else {
+            array_push($years[$date->year], $date);
+         }
       }
       unset($years[0]);
       $this->assignRef('years', $years);
