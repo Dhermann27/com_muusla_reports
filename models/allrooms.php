@@ -28,7 +28,7 @@ class muusla_reportsModelallrooms extends JModelItem
     
    function getBuildings() {
       $db = JFactory::getDBO();
-      $query = "SELECT id, name, 0 count FROM muusa_building";
+      $query = "SELECT id, name, 0 count FROM muusa_building ORDER BY display_order";
       $db->setQuery($query);
       return $db->loadAssocList("id");
    }

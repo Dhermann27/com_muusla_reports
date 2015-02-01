@@ -5,7 +5,7 @@ $user = JFactory::getUser();?>
    rel="stylesheet" />
 <script type="text/javascript">
    jQuery(document).ready(function ($) {
-	    $("#muusaApp .save").button().click(function (event) {
+	    $("#muusaApp .save").click(function (event) {
 	    	$("#muusaApp").submit();
 	        event.preventDefault();
 	        return false;
