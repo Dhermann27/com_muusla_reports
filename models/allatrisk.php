@@ -28,7 +28,7 @@ class muusla_reportsModelallatrisk extends JModelItem
 
    function getUnasscampers() {
       $db = JFactory::getDBO();
-      $query = "SELECT tc.id, tc.familyid, tc.familyname, tc.firstname, tc.lastname FROM muusa_thisyear_camper tc, muusa_year y WHERE muusa_isprereg(tc.id, y.year)>0 AND tc.roomid=0 AND y.is_current=1 AND tc.programid IN (1000,1002,1005,1007) ORDER BY tc.familyname, tc.birthdate";
+      $query = "SELECT tc.id, tc.familyid, tc.familyname, tc.firstname, tc.lastname FROM muusa_thisyear_camper tc, muusa_year y, muusa_program p WHERE muusa_isprereg(tc.id, y.year)>0 AND tc.roomid=0 AND y.is_current=1 AND tc.programid=p.id AND p.is_assign=1 ORDER BY tc.familyname, tc.birthdate";
       $db->setQuery($query);
       return $db->loadObjectList();
    }

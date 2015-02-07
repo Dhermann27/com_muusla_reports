@@ -53,10 +53,10 @@ $user = JFactory::getUser();?>
                            </select>
                            </td>
                            <td><input type="text"
-                              name="charge-amount-<? echo $family->id;?>"
+                              name="charge-amount-<?php echo $family->id;?>"
                               class="inputtexttiny ui-corner-all" /></td>
                            <td><input type="text"
-                              name="charge-memo-<? echo $family->id;?>"
+                              name="charge-memo-<?php echo $family->id;?>"
                               class="inputtext ui-corner-all"
                               value="<?php echo $charge->memo;?>" /></td>
                            <?php if(in_array("8", $user->groups) || in_array("10", $user->groups)) {

@@ -18,9 +18,9 @@ class muusla_reportsModelallregchart extends JModelItem
 {
    function getDates() {
       $db = JFactory::getDBO();
-      $query = "SELECT RIGHT(date,5) FROM muusa_staticdate ORDER BY RIGHT(date,5)";
+      $query = "SELECT day, RIGHT(date,5) date FROM muusa_staticdate ORDER BY RIGHT(date,5)";
       $db->setQuery($query);
-      return $db->loadResultArray();
+      return $db->loadAssocList("day", "date");
    }
 
    function getData() {

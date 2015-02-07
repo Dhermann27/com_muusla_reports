@@ -32,7 +32,7 @@ $user = JFactory::getUser();?>
                         echo "                     <td>" . $camper["city"] . ", " . $camper["statecd"] . "</td>\n";
                         echo "                     <td colspan='2' align='center'>" . ($camper["paydate"] != null ? $camper["paydate"] : "Unpaid") . "</td>\n";
                         if(in_array("8", $user->groups) || in_array("10", $user->groups)) {
-                           echo "                     <td align='right' nowrap='nowrap'><a class='myhidden' href='" . JURI::root(true) . "/index.php/register?editcamper=" . $camper['id'] . "' title='Registration Form'><i class='fa fa-user fa-2x'></i></a>\n";
+                           echo "                     <td align='right' nowrap='nowrap'><a href='" . JURI::root(true) . "/index.php/register?editcamper=" . $camper['id'] . "' title='Registration Form'><i class='fa fa-user fa-2x'></i></a>\n";
                            echo "                     <a href='" . JURI::root(true) . "/index.php/registration/workshops?editcamper=" . $camper['id'] . "' title='Workshop Selection'><i class='fa fa-tasks fa-2x'></i></a>\n";
                            echo "                     <a href='" . JURI::root(true) . "/index.php/rooms?editcamper=" . $camper['id'] . "' title='Assign Room'><i class='fa fa-home fa-2x'></i></a></td>\n";
                         } else {
