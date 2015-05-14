@@ -21,7 +21,7 @@ $user = JFactory::getUser();?>
                         <td>Age</td>
                         <td>City, State</td>
                         <td>Church</td>
-                        <?php if($program->id != 1005 && $program->id != 1006) {
+                        <?php if($program->id != 1009 && $program->id != 1006) {
                            if($program->id != 1007) {
                               echo "                     <td>Grade</td>\n";
                            } else {
@@ -40,10 +40,11 @@ $user = JFactory::getUser();?>
                      </tr>
                      <?php $count = 0;
                      $email = "";
+                     $pemail = "";
                      foreach($this->campers as $camper) {
                         if($camper->programid == $program->id) {
                            $count++;?>
-                     <tr>
+                     <tr <?php if($camper->years_attending == "1") echo "style='background-color: LightCoral;'"?>>
                         <td><?php echo $camper->sexcd;?></td>
                         <td><?php echo $camper->firstname;?></td>
                         <td><?php echo $camper->lastname;?></td>
@@ -77,14 +78,16 @@ $user = JFactory::getUser();?>
                         if($camper->email != "") {
                            $email .= $camper->email . "; \n";
                         }
+                        if($camper->eldest_email != "") {
+                           $pemail .= $camper->eldest_email . "; \n";
+                        }
+                        
                         }
                      }?>
-                     
-                     
                      <tr>
                         <td>&nbsp;</td>
                         <td>&nbsp;</td>
-                        <td colspan="2" align="2">Total Campers: <?php echo $count;?>
+                        <td colspan="2" align="right">Total Campers: <?php echo $count;?>
                         </td>
                         <td>&nbsp;</td>
                         <td>&nbsp;</td>
@@ -94,7 +97,12 @@ $user = JFactory::getUser();?>
                         <td colspan="9">E-mail Distribution List<br /> <?php echo $email;?>
                         </td>
                      </tr>
-                     <?php }?>
+                     <?php if($pemail != "" && $program->id != 1009 && $program->id != 1006) {?>
+                   	<tr>
+                   		<td colspan="9">Parent E-mail Distribution List<br /> <?php echo $pemail;?></td>
+                   	</tr>
+                     <?php }
+                     }?>
                   </table>
                </div>
                <span class="article_separator">&nbsp;</span>
