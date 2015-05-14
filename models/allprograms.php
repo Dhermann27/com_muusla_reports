@@ -21,7 +21,7 @@ class muusla_reportsModelallprograms extends JModelItem
 {
    function getCampers() {
       $db = JFactory::getDBO();
-      $query = "SELECT tc.id, tc.sexcd, tc.firstname, tc.lastname, tc.programid, tc.age, tc.grade, tc.familyid, tc.familyname, tc.sponsor, tc.email FROM muusa_thisyear_camper tc WHERE tc.programid!=1000 ORDER BY tc.lastname, tc.firstname";
+      $query = "SELECT tc.id, tc.sexcd, tc.firstname, tc.lastname, tc.programid, tc.age, tc.grade, tc.familyid, tc.familyname, tc.sponsor, tc.email, tc.city, tc.statecd, tc.churchname FROM muusa_thisyear_camper tc WHERE tc.programid!=1000 ORDER BY tc.lastname, tc.firstname";
       $db->setQuery($query);
       return $db->loadObjectList();
    }
